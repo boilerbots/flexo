@@ -1,0 +1,25 @@
+joints: [
+'left thigh',
+'left calf',
+'left ankle',
+'right thigh',
+'right calf',
+'right ankle',
+'left shoulder',
+'right shoulder',
+'left hip',
+'left foot',
+'right hip',
+'right foot',
+'left arm',
+'left hand',
+'right arm',
+'right hand',
+'head',
+]
+
+initialize: [250, 2, 7]
+enable: [254, 3, 2, 1]
+disable: [254, 3, 2, 0]
+get_position: [0, 2, 3]  # first value should be channel
+
