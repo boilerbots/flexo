@@ -12,6 +12,7 @@ find_package(ament_cmake REQUIRED)
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/Joints.msg"
   "msg/Status.msg"
+  "srv/JointControl.srv"
 )
 
 if(BUILD_TESTING)
