@@ -1,0 +1,5 @@
+int8 channel  # 0 to 23
+bool enable
+bool home
+---
+int16 position
