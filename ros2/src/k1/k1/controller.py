@@ -35,7 +35,7 @@ class Controller(Node):
     def __init__(self):
         super().__init__('controller')
         self.l = self.get_logger()
-        self.timer_period = 100 # in ms
+        self.timer_period = 10 # in ms
         self.running = False
         self.msg_mutex = Lock()
         self.hw_lock = Lock()
@@ -64,7 +64,7 @@ class Controller(Node):
 
         # Next goal
         self.goal_ticks = 0  # count down dt
-        self.joint_inc = [ 0 ] * self.MAX_CHANNELS
+        self.joint_inc = [ 0.0 ] * self.MAX_CHANNELS
         self.goal = [ 0 ] * self.MAX_CHANNELS
         self.current_position = [ 0 ] * self.MAX_CHANNELS  # current postion
         self.current_position[17] = 461
@@ -104,7 +104,7 @@ class Controller(Node):
                     self.l.warning('step_count=' + step_count)
                     return
                 delta = [goal[x] - self.current_position[x] for x in range(len(goal))]
-                self.joint_inc = [int(delta[x] // step_count) for x in range(len(goal))]
+                self.joint_inc = [(delta[x] / step_count) for x in range(len(goal))]
                 self.goal_ticks = step_count
 
                 max_delta = max(delta)
@@ -132,8 +132,9 @@ class Controller(Node):
         return response
 
     def cmd_callback(self, msg):
-        self.l.info('next pose: dt={}'.format(msg.dt))
+        self.l.debug('next pose: dt={} positions[]={}'.format(msg.dt, msg.position))
         diff = [x - y for x, y in zip(self.stand, msg.position)]
+        #self.l.info('diff={}'.format(diff))
         self.set_goal(diff, msg.dt, msg.synchronous)
 
     def receiver(self):
@@ -225,8 +226,8 @@ class Controller(Node):
         if self.goal_ticks > 0:
             self.l.info('moving ticks={}'.format(self.goal_ticks))
             for x in range(self.MAX_CHANNELS):
-                if self.current_position[x] != self.goal[x]:
-                    self.current_position[x] = self.current_position[x] + self.joint_inc[x]
+                #if self.current_position[x] != self.goal[x]:
+                self.current_position[x] = self.current_position[x] + self.joint_inc[x]
             self.compute_hwval()
             self.goal_ticks -= 1
 
