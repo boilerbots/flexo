@@ -1,3 +1,6 @@
+#
+#
+import RPi.GPIO as GPIO
 import enum
 import math
 import array
@@ -47,6 +50,14 @@ class Controller(Node):
         servo_config_file = self.get_parameter('servo_config_file').get_parameter_value().string_value
         pose_file = self.get_parameter('pose_file').get_parameter_value().string_value
 
+        GPIO.setwarnings(False)
+        # Set the GPIO mode to BCM
+        GPIO.setmode(GPIO.BCM)
+        # Set pin 5 as an output
+        # Pin 5 is OVLO, active high
+        GPIO.setup(5, GPIO.OUT)
+        GPIO.output(5, GPIO.LOW)
+
         package_path = packages.get_package_share_directory('k1')
         self.l.info('servo_config_file: ' + servo_config_file)
         with open(package_path + '/config/' + servo_config_file, 'r') as f:
@@ -85,6 +96,18 @@ class Controller(Node):
         self.pub_status = self.create_publisher(Status, '~/status', 10)
         self.sub = self.create_subscription(Joints, '~/cmd', self.cmd_callback, 10, callback_group=self.callback_group)
         self.srv_joints = self.create_service(JointControl, '~/control', self.control_callback, callback_group=self.callback_group)
+
+    def power_on(self):
+        # Pin 13 is enable, active high
+        GPIO.setup(13, GPIO.OUT)
+        GPIO.output(13, GPIO.HIGH)
+        time.sleep(1.0)
+    
+    def power_off(self):
+        # Pin 13 is enable, active high
+        GPIO.setup(13, GPIO.OUT)
+        GPIO.output(13, GPIO.LOW)
+        time.sleep(1.0)
 
     def compute_hwval(self):
         with self.hw_lock:
@@ -146,8 +169,9 @@ class Controller(Node):
 
         self.running = True
         while self.running:
-            readbuf = self.ser.read(self.ser.in_waiting)
-            #self.l.info("received {} data while in state={}".format(len(data), state))
+            readbuf = self.ser.read(1)
+            #readbuf = self.ser.read(self.ser.in_waiting)
+            #self.l.info("received {} data while in state={}".format(len(readbuf), state))
             for b in readbuf:
                 if state == self.State.IDLE and b == 0xFF:
                     state = self.State.START1
@@ -267,13 +291,21 @@ class Controller(Node):
 def main(args=None):
     rclpy.init(args=args)
     controller = Controller()
+    controller.power_on()
+
     executor = rclpy.executors.MultiThreadedExecutor()
     executor.add_node(controller)
     controller.connect()
     controller.start_up()
 
-    executor.spin()
+    try:
+        executor.spin()
+    except KeyboardInterrupt:
+        controller.get_logger().info('Keyboard interrupt, shutting down.\n')
     controller.running = False
+    controller.destroy_node()
+    controller.power_off()
+    #executor.shutdown()
     rclpy.shutdown()
 
 if __name__ == '__main__':
