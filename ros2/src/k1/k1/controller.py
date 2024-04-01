@@ -127,7 +127,7 @@ class Controller(Node):
             control.home))
         response.position = 0
         if control.home:
-            self.set_goal(self.stand, 3000, True)
+            self.set_goal(self.stand, 1000, True)
 
         return response
 
@@ -146,7 +146,7 @@ class Controller(Node):
 
         self.running = True
         while self.running:
-            readbuf = self.ser.read(1)
+            readbuf = self.ser.read(self.ser.in_waiting)
             #self.l.info("received {} data while in state={}".format(len(data), state))
             for b in readbuf:
                 if state == self.State.IDLE and b == 0xFF:
@@ -175,8 +175,7 @@ class Controller(Node):
                             self.l.info('servo {}  position={}'.format(address, position))
                             with self.hw_lock:
                                 self.current_position[address] = position
-                                if address == 16:
-                                    self.receive_count += 1
+                                self.receive_count += 1
                             #self.l.info('Captured addr={0:02x} len={1:02x} data={2}'.format(address, data_len, data))
 
 
@@ -205,8 +204,13 @@ class Controller(Node):
         while channel < self.REAL_CHANNELS:
             # responses seem to respond with 0xAx so 0x03 => 0xA3
             test = [channel, 0x02, 0x03]
+            last_receive_count = self.receive_count  # mark current count
             self.send(test)
-            time.sleep(0.002)
+            time.sleep(0.01)
+            while last_receive_count == self.receive_count:
+                self.l.warn('waiting')
+                time.sleep(0.001)
+            #time.sleep(0.002)
             channel += 1
 
     def enable_all(self):
@@ -253,11 +257,7 @@ class Controller(Node):
         self.send(self.enable)
         time.sleep(0.002)
         for x in range(4):
-            last_receive_count = self.receive_count
             self.get_position()
-            while last_receive_count == self.receive_count:
-                self.l.warn('waiting')
-                time.sleep(0.001)
             self.compute_hwval()
         #self.set_goal(self.current_position, 1000, False)
         #self.set_goal(self.stand, 1000, True)
