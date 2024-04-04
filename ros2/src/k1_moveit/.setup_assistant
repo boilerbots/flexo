@@ -1,0 +1,25 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: k1_description
+    relative_path: urdf/k1.xacro
+  srdf:
+    relative_path: config/k1.srdf
+  package_settings:
+    author_name: Curt Meyers
+    author_email: cmeyers@boilerbots.com
+    generated_timestamp: 1712196930
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity

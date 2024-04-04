@@ -49,7 +49,7 @@
     <parent link="base_link" />
     <child link="right_hip_link" />
     <axis xyz="0 1 0" />
-    <limit lower="-1.5" upper="1.5" effort="0" velocity="0" />
+    <limit lower="-1.5" upper="1.5" effort="0" velocity="3" />
   </joint>
   <link name="right_thigh_link">
     <inertial>
@@ -78,7 +78,7 @@
     <parent link="right_hip_link" />
     <child link="right_thigh_link" />
     <axis xyz="0 1 0" />
-    <limit lower="-3" upper="3" effort="0" velocity="0" />
+    <limit lower="-3" upper="3" effort="0" velocity="3" />
   </joint>
   <link name="right_knee_link">
     <inertial>
@@ -107,7 +107,7 @@
     <parent link="right_thigh_link" />
     <child link="right_knee_link" />
     <axis xyz="0 1 0" />
-    <limit lower="-3" upper="3" effort="0" velocity="0" />
+    <limit lower="-3" upper="3" effort="0" velocity="3" />
   </joint>
   <link name="right_calf_link">
     <inertial>
@@ -136,7 +136,7 @@
     <parent link="right_knee_link" />
     <child link="right_calf_link" />
     <axis xyz="0 1 0" />
-    <limit lower="-3" upper="3" effort="0" velocity="0" />
+    <limit lower="-3" upper="3" effort="0" velocity="3" />
   </joint>
   <link name="right_ankle_link">
     <inertial>
@@ -165,7 +165,7 @@
     <parent link="right_calf_link" />
     <child link="right_ankle_link" />
     <axis xyz="0 1 0" />
-    <limit lower="-3" upper="3" effort="0" velocity="0" />
+    <limit lower="-3" upper="3" effort="0" velocity="3" />
   </joint>
   <link name="left_hip_link">
     <inertial>
@@ -194,7 +194,7 @@
     <parent link="base_link" />
     <child link="left_hip_link" />
     <axis xyz="0 1 0" />
-    <limit lower="-3" upper="3" effort="0" velocity="0" />
+    <limit lower="-3" upper="3" effort="0" velocity="3" />
   </joint>
   <link name="left_thigh_link">
     <inertial>
@@ -223,7 +223,7 @@
     <parent link="left_hip_link" />
     <child link="left_thigh_link" />
     <axis xyz="0 1 0" />
-    <limit lower="-3" upper="3" effort="0" velocity="0" />
+    <limit lower="-3" upper="3" effort="0" velocity="3" />
   </joint>
   <link name="left_knee_link">
     <inertial>
@@ -252,7 +252,7 @@
     <parent link="left_thigh_link" />
     <child link="left_knee_link" />
     <axis xyz="0 1 0" />
-    <limit lower="-3" upper="3" effort="0" velocity="0" />
+    <limit lower="-3" upper="3" effort="0" velocity="3" />
   </joint>
   <link name="left_calf_link">
     <inertial>
@@ -281,7 +281,7 @@
     <parent link="left_knee_link" />
     <child link="left_calf_link" />
     <axis xyz="0 1 0" />
-    <limit lower="-3" upper="3" effort="0" velocity="0" />
+    <limit lower="-3" upper="3" effort="0" velocity="3" />
   </joint>
   <link name="left_ankle_link">
     <inertial>
@@ -310,7 +310,7 @@
     <parent link="left_calf_link" />
     <child link="left_ankle_link" />
     <axis xyz="0 1 0" />
-    <limit lower="-3" upper="3" effort="0" velocity="0" />
+    <limit lower="-3" upper="3" effort="0" velocity="3" />
   </joint>
   <link name="right_arm_link">
     <inertial>
@@ -339,7 +339,7 @@
     <parent link="base_link" />
     <child link="right_arm_link" />
     <axis xyz="0 1 0" />
-    <limit lower="-3" upper="3" effort="0" velocity="0" />
+    <limit lower="-3" upper="3" effort="0" velocity="3" />
   </joint>
   <link name="right_arm_upper">
     <inertial>
@@ -368,7 +368,7 @@
     <parent link="right_arm_link" />
     <child link="right_arm_upper" />
     <axis xyz="0 1 0" />
-    <limit lower="-3" upper="3" effort="0" velocity="0" />
+    <limit lower="-3" upper="3" effort="0" velocity="3" />
   </joint>
   <link name="right_arm_lower">
     <inertial>
@@ -397,7 +397,7 @@
     <parent link="right_arm_upper" />
     <child link="right_arm_lower" />
     <axis xyz="0 1 0" />
-    <limit lower="-3" upper="3" effort="0" velocity="0" />
+    <limit lower="-3" upper="3" effort="0" velocity="3" />
   </joint>
   <link name="left_arm_link">
     <inertial>
@@ -426,7 +426,7 @@
     <parent link="base_link" />
     <child link="left_arm_link" />
     <axis xyz="0 1 0" />
-    <limit lower="-3" upper="3" effort="0" velocity="0" />
+    <limit lower="-3" upper="3" effort="0" velocity="3" />
   </joint>
   <link name="left_arm_upper_link">
     <inertial>
@@ -455,7 +455,7 @@
     <parent link="left_arm_link" />
     <child link="left_arm_upper_link" />
     <axis xyz="0 1 0" />
-    <limit lower="-3" upper="3" effort="0" velocity="0" />
+    <limit lower="-3" upper="3" effort="0" velocity="3" />
   </joint>
   <link name="left_arm_lower_link">
     <inertial>
@@ -484,7 +484,7 @@
     <parent link="left_arm_upper_link" />
     <child link="left_arm_lower_link" />
     <axis xyz="0 1 0" />
-    <limit lower="-3" upper="3" effort="0" velocity="0" />
+    <limit lower="-3" upper="3" effort="0" velocity="3" />
   </joint>
   <link name="head_link">
     <inertial>
@@ -513,6 +513,6 @@
     <parent link="base_link" />
     <child link="head_link" />
     <axis xyz="0 -1 0" />
-    <limit lower="-3" upper="3" effort="0" velocity="0" />
+    <limit lower="-3" upper="3" effort="0" velocity="3" />
   </joint>
 </robot>

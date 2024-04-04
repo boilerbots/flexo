@@ -1,0 +1,20 @@
+# Default initial positions for k1's ros2_control fake system
+
+initial_positions:
+  head: 0
+  left_ankle: 0
+  left_arm_lower: 0
+  left_arm_upper: 0
+  left_calf: 0
+  left_hip: 0
+  left_knee: 0
+  left_shoulder: 0
+  left_thigh: 0
+  right_ankle: 0
+  right_arm_lower: 0
+  right_calf: 0
+  right_hip: 0
+  right_knee: 0
+  right_shoulder: 0
+  right_thigh: 0
+  right_upper: 0
