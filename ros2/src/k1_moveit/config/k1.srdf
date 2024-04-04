@@ -62,10 +62,10 @@
         <joint name="right_upper" value="0"/>
     </group_state>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
-    <end_effector name="right_foot" parent_link="right_ankle_link" group="k1_right_leg" parent_group="k1_right_leg"/>
-    <end_effector name="left_foot" parent_link="left_ankle_link" group="k1_left_leg" parent_group="k1_left_leg"/>
-    <end_effector name="right_hand" parent_link="right_arm_lower" group="k1_right_arm" parent_group="k1_right_arm"/>
-    <end_effector name="left_hand" parent_link="left_arm_lower_link" group="k1_left_arm" parent_group="k1_left_arm"/>
+    <end_effector name="right_foot" parent_link="right_ankle_link" group="k1_right_leg" parent_group="k1_robot"/>
+    <end_effector name="left_foot" parent_link="left_ankle_link" group="k1_left_leg" parent_group="k1_robot"/>
+    <end_effector name="right_hand" parent_link="right_arm_lower" group="k1_right_arm" parent_group="k1_robot"/>
+    <end_effector name="left_hand" parent_link="left_arm_lower_link" group="k1_left_arm" parent_group="k1_robot"/>
     <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
     <virtual_joint name="virtual_base" type="fixed" parent_frame="world" child_link="base_link"/>
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->

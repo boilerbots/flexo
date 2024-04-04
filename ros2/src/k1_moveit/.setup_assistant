@@ -7,7 +7,7 @@ moveit_setup_assistant_config:
   package_settings:
     author_name: Curt Meyers
     author_email: cmeyers@boilerbots.com
-    generated_timestamp: 1712196930
+    generated_timestamp: 1712203253
   control_xacro:
     command:
       - position

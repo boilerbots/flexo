@@ -3,13 +3,111 @@ controller_manager:
   ros__parameters:
     update_rate: 100  # Hz
 
-    k1_controller:
-      type: position_controllers/GripperActionController
+    k1_right_leg_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+
+    k1_left_leg_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+
+    k1_right_arm_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+
+    k1_left_arm_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+
+    k1_robot_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+
+    k1_head_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
 
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
-k1_controller:
+k1_right_leg_controller:
   ros__parameters:
-    joint: right_hip
+    joints:
+      - right_hip
+      - right_thigh
+      - right_knee
+      - right_calf
+      - right_ankle
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+k1_left_leg_controller:
+  ros__parameters:
+    joints:
+      - left_hip
+      - left_thigh
+      - left_knee
+      - left_calf
+      - left_ankle
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+k1_right_arm_controller:
+  ros__parameters:
+    joints:
+      - right_shoulder
+      - right_upper
+      - right_arm_lower
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+k1_left_arm_controller:
+  ros__parameters:
+    joints:
+      - left_shoulder
+      - left_arm_upper
+      - left_arm_lower
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+k1_robot_controller:
+  ros__parameters:
+    joints:
+      - left_hip
+      - left_thigh
+      - left_knee
+      - left_calf
+      - left_ankle
+      - left_shoulder
+      - left_arm_upper
+      - left_arm_lower
+      - right_hip
+      - right_thigh
+      - right_knee
+      - right_calf
+      - right_ankle
+      - right_shoulder
+      - right_upper
+      - right_arm_lower
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+k1_head_controller:
+  ros__parameters:
+    joints:
+      - head
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
