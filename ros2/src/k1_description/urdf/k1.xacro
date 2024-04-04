@@ -44,12 +44,12 @@
       </geometry>
     </collision>
   </link>
-  <joint name="right_hip" type="continuous">
+  <joint name="right_hip" type="revolute">
     <origin xyz="0.0005 -0.015 -0.02" rpy="-3.1416 0 1.5708" />
     <parent link="base_link" />
     <child link="right_hip_link" />
     <axis xyz="0 1 0" />
-    <limit lower="0" upper="0" effort="0" velocity="0" />
+    <limit lower="-3.0" upper="3.0" effort="1000" velocity="3.0" />
   </joint>
   <link name="right_thigh_link">
     <inertial>
@@ -73,12 +73,12 @@
       </geometry>
     </collision>
   </link>
-  <joint name="right_thigh" type="continuous">
+  <joint name="right_thigh" type="revolute">
     <origin xyz="-0.0094505 0.0005 0.033316" rpy="0.031659 0.025339 1.5716" />
     <parent link="right_hip_link" />
     <child link="right_thigh_link" />
     <axis xyz="0 1 0" />
-    <limit lower="0" upper="0" effort="0" velocity="0" />
+    <limit lower="-3.0" upper="3.0" effort="1000" velocity="3.0" />
   </joint>
   <link name="right_knee_link">
     <inertial>
@@ -102,12 +102,12 @@
       </geometry>
     </collision>
   </link>
-  <joint name="right_knee" type="continuous">
+  <joint name="right_knee" type="revolute">
     <origin xyz="-0.0021501 0 0.055492" rpy="0 0.49935 -3.1416" />
     <parent link="right_thigh_link" />
     <child link="right_knee_link" />
     <axis xyz="0 1 0" />
-    <limit lower="0" upper="0" effort="0" velocity="0" />
+    <limit lower="-3.0" upper="3.0" effort="1000" velocity="3.0" />
   </joint>
   <link name="right_calf_link">
     <inertial>
@@ -131,12 +131,12 @@
       </geometry>
     </collision>
   </link>
-  <joint name="right_calf" type="continuous">
+  <joint name="right_calf" type="revolute">
     <origin xyz="-0.023084 0 0.051939" rpy="3.1416 -0.11317 0" />
     <parent link="right_knee_link" />
     <child link="right_calf_link" />
     <axis xyz="0 1 0" />
-    <limit lower="0" upper="0" effort="0" velocity="0" />
+    <limit lower="-3.0" upper="3.0" effort="1000" velocity="3.0" />
   </joint>
   <link name="right_ankle_link">
     <inertial>
@@ -160,12 +160,12 @@
       </geometry>
     </collision>
   </link>
-  <joint name="right_ankle" type="continuous">
+  <joint name="right_ankle" type="revolute">
     <origin xyz="-0.012051 -0.0075 -0.030737" rpy="2.7982 0 -1.5708" />
     <parent link="right_calf_link" />
     <child link="right_ankle_link" />
     <axis xyz="0 1 0" />
-    <limit lower="0" upper="0" effort="0" velocity="0" />
+    <limit lower="-3.0" upper="3.0" effort="1000" velocity="3.0" />
   </joint>
   <link name="left_hip_link">
     <inertial>
@@ -189,12 +189,12 @@
       </geometry>
     </collision>
   </link>
-  <joint name="left_hip" type="continuous">
+  <joint name="left_hip" type="revolute">
     <origin xyz="0.0005 0.015 -0.02" rpy="3.1416 1.3958 1.5708" />
     <parent link="base_link" />
     <child link="left_hip_link" />
     <axis xyz="0 1 0" />
-    <limit lower="0" upper="0" effort="0" velocity="0" />
+    <limit lower="-3.0" upper="3.0" effort="1000" velocity="3.0" />
   </joint>
   <link name="left_thigh_link">
     <inertial>
@@ -218,12 +218,12 @@
       </geometry>
     </collision>
   </link>
-  <joint name="left_thigh" type="continuous">
+  <joint name="left_thigh" type="revolute">
     <origin xyz="0.03 0.0005 -0.009" rpy="-1.5708 0 1.4529" />
     <parent link="left_hip_link" />
     <child link="left_thigh_link" />
     <axis xyz="0 1 0" />
-    <limit lower="0" upper="0" effort="0" velocity="0" />
+    <limit lower="-3.0" upper="3.0" effort="1000" velocity="3.0" />
   </joint>
   <link name="left_knee_link">
     <inertial>
@@ -247,12 +247,12 @@
       </geometry>
     </collision>
   </link>
-  <joint name="left_knee" type="continuous">
+  <joint name="left_knee" type="revolute">
     <origin xyz="-0.0021501 0 -0.055492" rpy="0 -0.49935 3.1416" />
     <parent link="left_thigh_link" />
     <child link="left_knee_link" />
     <axis xyz="0 1 0" />
-    <limit lower="0" upper="0" effort="0" velocity="0" />
+    <limit lower="-3.0" upper="3.0" effort="1000" velocity="3.0" />
   </joint>
   <link name="left_calf_link">
     <inertial>
@@ -276,12 +276,12 @@
       </geometry>
     </collision>
   </link>
-  <joint name="left_calf" type="continuous">
+  <joint name="left_calf" type="revolute">
     <origin xyz="-0.019869 0 -0.053251" rpy="-3.1416 0.052065 0" />
     <parent link="left_knee_link" />
     <child link="left_calf_link" />
     <axis xyz="0 1 0" />
-    <limit lower="0" upper="0" effort="0" velocity="0" />
+    <limit lower="-3.0" upper="3.0" effort="1000" velocity="3.0" />
   </joint>
   <link name="left_ankle_link">
     <inertial>
@@ -305,12 +305,12 @@
       </geometry>
     </collision>
   </link>
-  <joint name="left_ankle" type="continuous">
+  <joint name="left_ankle" type="revolute">
     <origin xyz="-0.0087077 -0.0075 0.031846" rpy="1.5708 1.3342 0" />
     <parent link="left_calf_link" />
     <child link="left_ankle_link" />
     <axis xyz="0 1 0" />
-    <limit lower="0" upper="0" effort="0" velocity="0" />
+    <limit lower="-3.0" upper="3.0" effort="1000" velocity="3.0" />
   </joint>
   <link name="right_arm_link">
     <inertial>
@@ -334,12 +334,12 @@
       </geometry>
     </collision>
   </link>
-  <joint name="right_shoulder" type="continuous">
+  <joint name="right_shoulder" type="revolute">
     <origin xyz="-0.007 -0.026 0.075" rpy="3.1416 -1.5708 0" />
     <parent link="base_link" />
     <child link="right_arm_link" />
     <axis xyz="0 1 0" />
-    <limit lower="0" upper="0" effort="0" velocity="0" />
+    <limit lower="-3.0" upper="3.0" effort="1000" velocity="3.0" />
   </joint>
   <link name="right_arm_upper_link">
     <inertial>
@@ -363,12 +363,12 @@
       </geometry>
     </collision>
   </link>
-  <joint name="right_upper" type="continuous">
+  <joint name="right_upper" type="revolute">
     <origin xyz="0 0.0350000000000004 0" rpy="-1.56989921107132 -0.00259316215202615 -0.33306656840474" />
     <parent link="right_arm_link" />
     <child link="right_arm_upper_link" />
     <axis xyz="0 1 0" />
-    <limit lower="0" upper="0" effort="0" velocity="0" />
+    <limit lower="-3.0" upper="3.0" effort="1000" velocity="3.0" />
   </joint>
   <link name="right_arm_lower_link">
     <inertial>
@@ -392,12 +392,12 @@
       </geometry>
     </collision>
   </link>
-  <joint name="right_arm_lower" type="continuous">
+  <joint name="right_arm_lower" type="revolute">
     <origin xyz="-0.0667804560220959 0 -0.0209850111622641" rpy="1.5864967516128 0.304075688258208 -3.0891987069566" />
     <parent link="right_arm_upper_link" />
     <child link="right_arm_lower_link" />
     <axis xyz="0 1 0" />
-    <limit lower="0" upper="0" effort="0" velocity="0" />
+    <limit lower="-3.0" upper="3.0" effort="1000" velocity="3.0" />
   </joint>
   <link name="left_arm_link">
     <inertial>
@@ -421,12 +421,12 @@
       </geometry>
     </collision>
   </link>
-  <joint name="left_shoulder" type="continuous">
+  <joint name="left_shoulder" type="revolute">
     <origin xyz="-0.007 0.026 0.075" rpy="3.1416 -1.5708 0" />
     <parent link="base_link" />
     <child link="left_arm_link" />
     <axis xyz="0 1 0" />
-    <limit lower="0" upper="0" effort="0" velocity="0" />
+    <limit lower="-3.0" upper="3.0" effort="1000" velocity="3.0" />
   </joint>
   <link name="left_arm_upper_link">
     <inertial>
@@ -450,12 +450,12 @@
       </geometry>
     </collision>
   </link>
-  <joint name="left_arm_upper" type="continuous">
+  <joint name="left_arm_upper" type="revolute">
     <origin xyz="0 -0.0350000000000004 0" rpy="1.57169344251847 0.00259316215202667 0.33306656840474" />
     <parent link="left_arm_link" />
     <child link="left_arm_upper_link" />
     <axis xyz="0 1 0" />
-    <limit lower="0" upper="0" effort="0" velocity="0" />
+    <limit lower="-3.0" upper="3.0" effort="1000" velocity="3.0" />
   </joint>
   <link name="left_arm_lower_link">
     <inertial>
@@ -479,12 +479,12 @@
       </geometry>
     </collision>
   </link>
-  <joint name="left_arm_lower" type="continuous">
+  <joint name="left_arm_lower" type="revolute">
     <origin xyz="-0.0667804560220957 0 -0.020985011162264" rpy="1.5864967516128 0.304075688258208 -3.0891987069566" />
     <parent link="left_arm_upper_link" />
     <child link="left_arm_lower_link" />
     <axis xyz="0 1 0" />
-    <limit lower="0" upper="0" effort="0" velocity="0" />
+    <limit lower="-3.0" upper="3.0" effort="1000" velocity="3.0" />
   </joint>
   <link name="head_link">
     <inertial>
@@ -513,6 +513,6 @@
     <parent link="base_link" />
     <child link="head_link" />
     <axis xyz="0 1 0" />
-    <limit lower="0" upper="0" effort="0" velocity="0" />
+    <limit lower="-3.0" upper="3.0" effort="1000" velocity="3.0" />
   </joint>
 </robot>

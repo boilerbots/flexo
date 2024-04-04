@@ -62,10 +62,10 @@
         <joint name="right_upper" value="0"/>
     </group_state>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
-    <end_effector name="right_foot" parent_link="right_ankle_link" group="k1_right_leg" parent_group="k1_robot"/>
-    <end_effector name="left_foot" parent_link="left_ankle_link" group="k1_left_leg" parent_group="k1_robot"/>
-    <end_effector name="right_hand" parent_link="right_arm_lower" group="k1_right_arm" parent_group="k1_robot"/>
-    <end_effector name="left_hand" parent_link="left_arm_lower_link" group="k1_left_arm" parent_group="k1_robot"/>
+    <end_effector name="right_foot" parent_link="right_hip_link" group="k1_right_leg" parent_group="k1_robot"/>
+    <end_effector name="left_foot" parent_link="left_hip_link" group="k1_left_leg" parent_group="k1_robot"/>
+    <end_effector name="left_hand" parent_link="left_arm_link" group="k1_left_arm" parent_group="k1_robot"/>
+    <end_effector name="right_hand" parent_link="right_arm_link" group="k1_right_arm" parent_group="k1_robot"/>
     <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
     <virtual_joint name="virtual_base" type="fixed" parent_frame="world" child_link="base_link"/>
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
@@ -74,34 +74,28 @@
     <disable_collisions link1="base_link" link2="left_hip_link" reason="Adjacent"/>
     <disable_collisions link1="base_link" link2="right_arm_link" reason="Adjacent"/>
     <disable_collisions link1="base_link" link2="right_hip_link" reason="Adjacent"/>
+    <disable_collisions link1="head_link" link2="left_arm_link" reason="Never"/>
     <disable_collisions link1="head_link" link2="left_hip_link" reason="Never"/>
     <disable_collisions link1="head_link" link2="left_thigh_link" reason="Never"/>
+    <disable_collisions link1="head_link" link2="right_arm_link" reason="Never"/>
     <disable_collisions link1="head_link" link2="right_hip_link" reason="Never"/>
-    <disable_collisions link1="head_link" link2="right_knee_link" reason="Never"/>
     <disable_collisions link1="head_link" link2="right_thigh_link" reason="Never"/>
     <disable_collisions link1="left_ankle_link" link2="left_calf_link" reason="Adjacent"/>
     <disable_collisions link1="left_arm_link" link2="left_arm_upper_link" reason="Adjacent"/>
     <disable_collisions link1="left_arm_link" link2="left_hip_link" reason="Never"/>
-    <disable_collisions link1="left_arm_link" link2="left_thigh_link" reason="Never"/>
     <disable_collisions link1="left_arm_link" link2="right_arm_link" reason="Never"/>
+    <disable_collisions link1="left_arm_link" link2="right_arm_upper_link" reason="Never"/>
     <disable_collisions link1="left_arm_link" link2="right_hip_link" reason="Never"/>
-    <disable_collisions link1="left_arm_link" link2="right_knee_link" reason="Never"/>
-    <disable_collisions link1="left_arm_link" link2="right_thigh_link" reason="Never"/>
     <disable_collisions link1="left_arm_lower_link" link2="left_arm_upper_link" reason="Adjacent"/>
-    <disable_collisions link1="left_arm_upper_link" link2="right_hip_link" reason="Never"/>
-    <disable_collisions link1="left_arm_upper_link" link2="right_thigh_link" reason="Never"/>
+    <disable_collisions link1="left_arm_upper_link" link2="right_arm_link" reason="Never"/>
     <disable_collisions link1="left_calf_link" link2="left_knee_link" reason="Adjacent"/>
     <disable_collisions link1="left_hip_link" link2="left_thigh_link" reason="Adjacent"/>
     <disable_collisions link1="left_hip_link" link2="right_arm_link" reason="Never"/>
-    <disable_collisions link1="left_hip_link" link2="right_arm_upper" reason="Never"/>
     <disable_collisions link1="left_knee_link" link2="left_thigh_link" reason="Adjacent"/>
-    <disable_collisions link1="left_thigh_link" link2="right_arm_link" reason="Never"/>
     <disable_collisions link1="right_ankle_link" link2="right_calf_link" reason="Adjacent"/>
-    <disable_collisions link1="right_arm_link" link2="right_arm_upper" reason="Adjacent"/>
+    <disable_collisions link1="right_arm_link" link2="right_arm_upper_link" reason="Adjacent"/>
     <disable_collisions link1="right_arm_link" link2="right_hip_link" reason="Never"/>
-    <disable_collisions link1="right_arm_link" link2="right_knee_link" reason="Never"/>
-    <disable_collisions link1="right_arm_link" link2="right_thigh_link" reason="Never"/>
-    <disable_collisions link1="right_arm_lower" link2="right_arm_upper" reason="Adjacent"/>
+    <disable_collisions link1="right_arm_lower_link" link2="right_arm_upper_link" reason="Adjacent"/>
     <disable_collisions link1="right_calf_link" link2="right_knee_link" reason="Adjacent"/>
     <disable_collisions link1="right_hip_link" link2="right_thigh_link" reason="Adjacent"/>
     <disable_collisions link1="right_knee_link" link2="right_thigh_link" reason="Adjacent"/>
