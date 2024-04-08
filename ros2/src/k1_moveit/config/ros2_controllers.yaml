@@ -97,6 +97,7 @@ k1_robot_controller:
       - right_shoulder
       - right_upper
       - right_arm_lower
+      - head
     command_interfaces:
       - position
     state_interfaces:

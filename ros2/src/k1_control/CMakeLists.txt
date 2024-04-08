@@ -13,6 +13,8 @@ set(HW_IF_INCLUDE_DEPENDS
   pluginlib
   rcpputils
   hardware_interface
+  k1_interfaces
+  libserial
 )
 set(REF_GEN_INCLUDE_DEPENDS
   kdl_parser
@@ -41,7 +43,12 @@ add_library(
   k1_control
   SHARED
   src/k1_hardware.cpp
+  src/k1_robot.cpp
+  src/k1_executor.cpp
+  src/k1_params.cpp
 )
+
+target_link_libraries(k1_control PUBLIC serial yaml-cpp)
 
 target_include_directories(k1_control PUBLIC
 $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>

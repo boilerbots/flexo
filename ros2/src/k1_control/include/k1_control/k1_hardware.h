@@ -10,6 +10,10 @@
 #include "hardware_interface/types/hardware_interface_return_values.hpp"
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
 
+#include "k1_control/k1_robot.h"
+#include "k1_control/k1_params.h"
+#include "k1_control/k1_executor.h"
+
 using hardware_interface::return_type;
 
 namespace k1_control
@@ -40,6 +44,10 @@ protected:
 
   std::unordered_map<std::string, std::vector<std::string>> joint_interfaces = {
     {"position", {}}, {"velocity", {}}};
+
+  std::shared_ptr<Robot> robot_;
+  std::shared_ptr<ParamServiceServer> node_;
+  std::shared_ptr<Executor> executor_;
 };
 
 }

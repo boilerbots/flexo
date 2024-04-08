@@ -9,6 +9,7 @@
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
+  <depend>k1_interfaces</depend>
   <depend>control_msgs</depend>
   <depend>controller_interface</depend>
   <depend>hardware_interface</depend>
@@ -19,6 +20,8 @@
   <depend>rcpputils</depend>
   <depend>realtime_tools</depend>
   <depend>trajectory_msgs</depend>
+  <depend>libserial</depend>
+  <depend>class_loader</depend>
 
   <exec_depend>controller_manager</exec_depend>
   <exec_depend>joint_state_broadcaster</exec_depend>

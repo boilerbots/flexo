@@ -3,17 +3,40 @@
 #include "k1_control/k1_hardware.h"
 #include <string>
 #include <vector>
-#include "k1_interfaces/msg/Joints.hpp"
+#include "k1_interfaces/msg/joints.hpp"
+#include "ament_index_cpp/get_package_share_directory.hpp"
+#include <yaml-cpp/yaml.h>
+
 
 namespace k1_control
 {
 CallbackReturn RobotSystem::on_init(const hardware_interface::HardwareInfo & info)
 {
-  rclcpp::Logger logger = rclcpp::get_logger("k1_hardware");
-
   if (hardware_interface::SystemInterface::on_init(info) != CallbackReturn::SUCCESS)
   {
     return CallbackReturn::ERROR;
+  }
+
+  rclcpp::Logger logger = rclcpp::get_logger("k1_hardware");
+  //lifecycle_node->get_node_parameters_interface();
+  //get_node()->declare_parameter("my_parameter", "world");
+  std::string serial_device =info_.hardware_parameters.at("device");
+  //std::string serial_device("/dev/ttyAMA0");
+  RCLCPP_INFO(logger, "Device: %s", serial_device.c_str());
+
+  std::string servo_config_file("servo_config.yaml");
+  std::string pose_file("poses.yaml");
+
+  auto package_path = ament_index_cpp::get_package_share_directory("k1");
+  package_path += "/config/" + servo_config_file;
+  RCLCPP_INFO_STREAM(logger, "Loading YAML: " << package_path);
+  YAML::Node servo_config = YAML::LoadFile(package_path);
+  //RCLCPP_INFO_STREAM(logger, "Config: " << servo_config[0].as<std::string>());
+  //RCLCPP_INFO_STREAM(logger, "Size: " << servo_config.size());
+  std::array<int, 3> initialize;
+  for (int xx = 0; auto itr : servo_config["initialize"]) {
+    //RCLCPP_INFO_STREAM(logger, "found: " << it.as<int>() << "\n");
+    initialize[xx++] = itr.as<int>();
   }
 
   // robot has 17 joints
@@ -30,10 +53,15 @@ CallbackReturn RobotSystem::on_init(const hardware_interface::HardwareInfo & inf
   {
     for (const auto & interface : joint.state_interfaces)
     {
-      RCLCPP_INFO(logger, "Interface: %s  Joint %s", interface.name.c_str(), joint.name.c_str());
+      //RCLCPP_INFO(logger, "Interface: %s  Joint %s", interface.name.c_str(), joint.name.c_str());
       joint_interfaces[interface.name].push_back(joint.name);
     }
   }
+
+  robot_ = std::make_shared<Robot>(serial_device);
+  node_ = std::make_shared<ParamServiceServer>(rclcpp::NodeOptions(), robot_);
+  executor_ = std::make_shared<Executor>();
+  executor_->add_node(node_);
 
   return CallbackReturn::SUCCESS;
 }
