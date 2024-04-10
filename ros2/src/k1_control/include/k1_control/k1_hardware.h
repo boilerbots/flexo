@@ -48,6 +48,7 @@ protected:
   std::shared_ptr<Robot> robot_;
   std::shared_ptr<ParamServiceServer> node_;
   std::shared_ptr<Executor> executor_;
+
 };
 
 }

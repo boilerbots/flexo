@@ -7,7 +7,7 @@
             <hardware>
                 <!--<plugin>mock_components/GenericSystem</plugin>-->
                 <plugin>k1_control/RobotSystem</plugin>
-                <param name="device">/dev/ttyUSB0</param>
+                <param name="device">/dev/ttyAMA0</param>
             </hardware>
             <joint name="right_hip">
                 <command_interface name="position"/>

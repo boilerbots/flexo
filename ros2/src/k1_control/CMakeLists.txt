@@ -48,6 +48,7 @@ add_library(
   src/k1_params.cpp
 )
 
+set_property(TARGET k1_control PROPERTY CXX_STANDARD 20)
 target_link_libraries(k1_control PUBLIC serial yaml-cpp)
 
 target_include_directories(k1_control PUBLIC
