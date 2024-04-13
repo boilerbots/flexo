@@ -14,7 +14,6 @@ set(HW_IF_INCLUDE_DEPENDS
   rcpputils
   hardware_interface
   k1_interfaces
-  libserial
 )
 set(REF_GEN_INCLUDE_DEPENDS
   kdl_parser
@@ -48,7 +47,7 @@ add_library(
 )
 
 set_property(TARGET k1_control PROPERTY CXX_STANDARD 20)
-target_link_libraries(k1_control PUBLIC serial yaml-cpp)
+target_link_libraries(k1_control PUBLIC yaml-cpp)
 
 target_include_directories(k1_control PUBLIC
 $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
