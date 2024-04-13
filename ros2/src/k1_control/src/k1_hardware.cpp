@@ -68,10 +68,10 @@ CallbackReturn RobotSystem::on_init(const hardware_interface::HardwareInfo & inf
     }
   }
 
-  //robot_ = std::make_shared<Robot>(serial_device);
-  //node_ = std::make_shared<ParamServiceServer>(rclcpp::NodeOptions(), robot_);
-  //executor_ = std::make_shared<Executor>();
-  //executor_->add_node(node_);
+  robot_ = std::make_shared<Robot>(serial_device);
+  node_ = std::make_shared<ParamServiceServer>(rclcpp::NodeOptions(), robot_);
+  executor_ = std::make_shared<Executor>();
+  executor_->add_node(node_);
 
   return CallbackReturn::SUCCESS;
 }
@@ -164,12 +164,14 @@ return_type RobotSystem::write(const rclcpp::Time &, const rclcpp::Duration &)
   return return_type::OK;
 }
 
-#if 0
+#if 1
 return_type RobotSystem::perform_command_mode_switch(
     const std::vector<std::string> & /*start_interfaces*/,
     const std::vector<std::string> & /*stop_interfaces*/)
 {
-  //robot_->startRobot();
+  rclcpp::Logger logger = rclcpp::get_logger("k1_hardware");
+  RCLCPP_INFO(logger, "\n\n Starting Robot \n\n");
+  robot_->startRobot();
   return return_type::OK;
 }
 #endif

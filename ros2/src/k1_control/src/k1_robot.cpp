@@ -7,11 +7,10 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <math.h>
-
-
+#include <linux/serial.h>
 #include <rclcpp/logging.hpp>
-
 #include "k1_control/k1_robot.h"
+#include <sys/ioctl.h>
 
 using namespace LibSerial;
 
@@ -41,30 +40,81 @@ Robot::Robot(const std::string& device) :
 {
 
   conversion = COUNTS_PER_REV / (2 * M_PI);
-#if 0
+  RCLCPP_INFO_STREAM(logger_, "Opening: " << device_name_);
+#if 1
   serial_device_ = open(device_name_.c_str(), O_RDWR);
   // Set the serial port parameters
   termios tty;
   tcgetattr(serial_device_, &tty);
-  tty.c_cflag = B115200;
+  //tty.c_cflag = B115200;
   tty.c_cflag |= CS8;
   tty.c_cflag |= CLOCAL;
   tty.c_cflag |= CREAD;
-  tcsetattr(serial_device_, TCSANOW, &tty);
-#endif
-  RCLCPP_INFO_STREAM(logger_, "Opening: " << device_name_);
-  //serial_device_.Open(device_name_); // device_name_ doesn't work
-  //serial_device_.SetBaudRate( BaudRate::BAUD_115200 );
+  tty.c_cflag |= CSTOPB;
+  tty.c_cflag |= CRTSCTS;
+  tty.c_lflag &= ~ICANON;
+  tty.c_lflag &= ~PARENB;
+  tty.c_iflag &= ~(IXON | IXOFF | IXANY);
+  tty.c_iflag &= ~(IGNBRK|BRKINT|PARMRK|ISTRIP|INLCR|IGNCR|ICRNL);
+  tty.c_oflag &= ~OPOST;
+  tty.c_oflag &= ~ONLCR;
+  tty.c_cc[VTIME] = 10;
+  tty.c_cc[VMIN] = 0;
+  cfsetspeed(&tty, B115200);
+  if (tcsetattr(serial_device_, TCSANOW, &tty) != 0) {
+    RCLCPP_ERROR(logger_, "Error configuring port");
+  }
 
-  //RCLCPP_INFO_STREAM(logger_, "Start receiving Thread");
-  //t = std::thread(&Robot::receive, this);
+  struct serial_rs485 rs485conf;
+
+  /* Enable RS485 mode: */
+  rs485conf.flags |= SER_RS485_ENABLED;
+
+  /* Set logical level for RTS pin equal to 1 when sending: */
+  //rs485conf.flags |= SER_RS485_RTS_ON_SEND;
+  /* or, set logical level for RTS pin equal to 0 when sending: */
+  rs485conf.flags &= ~(SER_RS485_RTS_ON_SEND);
+
+  /* Set logical level for RTS pin equal to 1 after sending: */
+  rs485conf.flags |= SER_RS485_RTS_AFTER_SEND;
+  /* or, set logical level for RTS pin equal to 0 after sending: */
+  //rs485conf.flags &= ~(SER_RS485_RTS_AFTER_SEND);
+
+  /* Set rts delay before send, if needed: */
+  rs485conf.delay_rts_before_send = 0;
+
+  /* Set rts delay after send, if needed: */
+  rs485conf.delay_rts_after_send = 0;
+
+  /* Set this flag if you want to receive data even while sending data */
+  //rs485conf.flags |= SER_RS485_RX_DURING_TX;
+
+  if (ioctl (serial_device_, TIOCSRS485, &rs485conf) < 0) {
+    RCLCPP_ERROR(logger_, "Failed to set RS485 mode");
+  }
+
+
+#else
+  serial_device_.Open(device_name_); // device_name_ doesn't work
+  serial_device_.SetBaudRate( BaudRate::BAUD_115200 );
+  serial_device_.SetFlowControl( FlowControl::FLOW_CONTROL_HARDWARE );
+  serial_device_.SetCharacterSize( CharacterSize::CHAR_SIZE_8 );
+  serial_device_.SetStopBits( StopBits::STOP_BITS_1 );
+  serial_device_.SetParity( Parity::PARITY_NONE );
+#endif
+
+  RCLCPP_INFO_STREAM(logger_, "Start receiving Thread");
+  t = std::thread(&Robot::receive, this);
 }
 
 Robot::~Robot() {
   stopRobot();
   running_ = false;
-  //close(serial_device_);
+#if 0
   serial_device_.Close();
+#else
+  close(serial_device_);
+#endif
 }
 
 void Robot::receive()
@@ -79,14 +129,20 @@ void Robot::receive()
   RCLCPP_INFO_STREAM(logger_, "Start receiving Loop");
   running_ = true;
   while(running_) {
-    RCLCPP_INFO(logger_, "running");
-    usleep(100000);
+    //RCLCPP_INFO(logger_, "running");
+#if 0
     try {
       serial_device_.ReadByte(next_byte, 1000);
     } catch (LibSerial::ReadTimeout & e) {
       continue;
     }
+#else
+    if (read(serial_device_, &next_byte, 1) < 1) {
+      continue;
+    }
+#endif
 
+    RCLCPP_INFO(logger_, "received: %x", next_byte);
     switch (state)
     {
       case IDLE:
@@ -121,7 +177,7 @@ void Robot::receive()
           }
           if (data[2] == 0xA3) {
             uint16_t position = (data[3] * 256) + data[4] + CORRECTION;
-            RCLCPP_DEBUG(logger_, "channel %d  position %d", address, position);
+            RCLCPP_INFO(logger_, "channel %d  position %d", address, position);
             hw_lock.lock();
             current_position[address] = position;
             ++receive_count;
@@ -149,11 +205,17 @@ void Robot::send(const std::span<const uint8_t> & data) {
   std::vector<uint8_t> msg = {255, 255};
   msg.insert(msg.end(), data.begin(), data.end());
   msg.push_back(add_crc(data));
-  RCLCPP_INFO(logger_, "sending: " );
+  RCLCPP_INFO(logger_, "sending: ");
+#if 0
   for (auto d : msg) {
+    //RCLCPP_INFO(logger_, "%x ", d);
     serial_device_.WriteByte(d);
   }
   serial_device_.FlushOutputBuffer();
+#else
+  write(serial_device_, msg.data(), msg.size());
+  tcdrain(serial_device_);
+#endif
 }
 
 void Robot::get_position() {
@@ -166,8 +228,9 @@ void Robot::get_position() {
     send(msg);
     usleep(10000);
     while (last_receive_count == receive_count) {
-      RCLCPP_WARN(logger_, "waiting");
-      usleep(1000);
+      RCLCPP_WARN(logger_, "waiting for position");
+      usleep(1000000);
+      send(msg);
     }
   }
 }

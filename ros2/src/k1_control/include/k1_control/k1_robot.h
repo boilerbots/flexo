@@ -63,8 +63,8 @@ class Robot {
 
   std::string device_name_;
   rclcpp::Logger logger_;
-  //int serial_device_;
-  LibSerial::SerialPort serial_device_;
+  int serial_device_;
+  //LibSerial::SerialPort serial_device_;
   std::thread t;
   bool running_;
 
