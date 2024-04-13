@@ -61,8 +61,7 @@ ament_target_dependencies(
 )
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE "K1_CONTROL_BUILDING_DLL")
-pluginlib_export_plugin_description_file(hardware_interface k1_control_plugin.xml)
-pluginlib_export_plugin_description_file(controller_interface k1_control_plugin.xml)
+pluginlib_export_plugin_description_file(k1_control k1_control_plugin.xml)
 
 install(TARGETS k1_control
   EXPORT export_k1_control

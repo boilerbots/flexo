@@ -9,6 +9,8 @@ from launch.actions import (
 from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
+from launch.actions import RegisterEventHandler
+from launch.event_handlers import OnProcessExit
 
 from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterValue
@@ -55,6 +57,8 @@ def generate_demo_launch(moveit_config, launch_package_path=None):
         )
     )
     ld.add_action(DeclareBooleanLaunchArg("use_rviz", default_value=False))
+
+
     # If there are virtual joints, broadcast static tf by including virtual_joints launch
     virtual_joints_launch = (
         launch_package_path / "launch/static_virtual_joint_tfs.launch.py"
@@ -103,28 +107,38 @@ def generate_demo_launch(moveit_config, launch_package_path=None):
     #        condition=IfCondition(LaunchConfiguration("db")),
     #    )
     #)
-
-    # Fake joint driver
-    ld.add_action(
-        Node(
+    ros2_controller = Node(
             package="controller_manager",
             executable="ros2_control_node",
             parameters=[
                 str(moveit_config.package_path / "config/ros2_controllers.yaml"),
             ],
-            #remappings=[
-            #    ("/controller_manager/robot_description", "/robot_description"),
-            #],
+            remappings=[
+                ("/controller_manager/robot_description", "/robot_description"),
+            ],
+            output={
+                'stdout': 'screen',
+                'stderr': 'screen',
+            },
         )
-    )
+    ld.add_action(ros2_controller)
 
-    ld.add_action(
-        IncludeLaunchDescription(
+    controller_spawner =  IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
                 str(launch_package_path / "launch/spawn_controllers.launch.py")
             ),
         )
-    )
+    ld.add_action(controller_spawner)
+
+    # Delay start of robot_controller after `joint_state_broadcaster`
+    #delay_spawner = RegisterEventHandler(
+    #    event_handler=OnProcessExit(
+    #        target_action=ros2_controller,
+    #        on_exit=[controller_spawner],
+    #    )
+    #)
+    #ld.add_action(delay_spawner)
+
 
     return ld
 
