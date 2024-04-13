@@ -53,10 +53,11 @@ Robot::Robot(const std::string& device) :
   tcsetattr(serial_device_, TCSANOW, &tty);
 #endif
   RCLCPP_INFO_STREAM(logger_, "Opening: " << device_name_);
-  serial_device_.Open(device_name_); // device_name_ doesn't work
-  serial_device_.SetBaudRate( BaudRate::BAUD_115200 );
+  //serial_device_.Open(device_name_); // device_name_ doesn't work
+  //serial_device_.SetBaudRate( BaudRate::BAUD_115200 );
 
-  t = std::thread(&Robot::receive, this);
+  //RCLCPP_INFO_STREAM(logger_, "Start receiving Thread");
+  //t = std::thread(&Robot::receive, this);
 }
 
 Robot::~Robot() {
@@ -75,6 +76,7 @@ void Robot::receive()
   uint8_t data_len;
   std::vector<uint8_t> data;
 
+  RCLCPP_INFO_STREAM(logger_, "Start receiving Loop");
   running_ = true;
   while(running_) {
     RCLCPP_INFO(logger_, "running");
@@ -147,6 +149,7 @@ void Robot::send(const std::span<const uint8_t> & data) {
   std::vector<uint8_t> msg = {255, 255};
   msg.insert(msg.end(), data.begin(), data.end());
   msg.push_back(add_crc(data));
+  RCLCPP_INFO(logger_, "sending: " );
   for (auto d : msg) {
     serial_device_.WriteByte(d);
   }
@@ -182,6 +185,7 @@ void Robot::stopRobot() {
 }
 
 void Robot::startRobot() {
+  RCLCPP_INFO_STREAM(logger_, "Starting the robot");
   send(std::span<const uint8_t>(initialize));
   usleep(300000);
   send(std::span<const uint8_t>(enable));

@@ -25,7 +25,6 @@ set(CONTROLLER_INCLUDE_DEPENDS
   pluginlib
   rcpputils
   controller_interface
-  realtime_tools
   trajectory_msgs
 )
 

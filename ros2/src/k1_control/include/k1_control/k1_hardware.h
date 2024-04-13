@@ -32,6 +32,11 @@ public:
   return_type read(const rclcpp::Time & time, const rclcpp::Duration & period) override;
 
   return_type write(const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/) override;
+#if 0
+  return_type perform_command_mode_switch(
+    const std::vector<std::string> & /*start_interfaces*/,
+    const std::vector<std::string> & /*stop_interfaces*/) override;
+#endif
 
 protected:
   /// The size of this vector is (standard_interfaces_.size() x nr_joints)

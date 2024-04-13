@@ -75,32 +75,10 @@ planner_configs:
 manipulator:
   default_planner_config: RRTConnectkConfigDefault
   planner_configs:
-    - APSConfigDefault
-    - SBLkConfigDefault
-    - ESTkConfigDefault
-    - LBKPIECEkConfigDefault
-    - BKPIECEkConfigDefault
-    - KPIECEkConfigDefault
     - RRTkConfigDefault
     - RRTConnectkConfigDefault
     - RRTstarkConfigDefault
-    - TRRTkConfigDefault
-    - PRMkConfigDefault
-    - PRMstarkConfigDefault
   enforce_constrained_state_space: true
   ##Note: commenting the following line lets moveit chose RRTConnect as default planner rather than LBKPIECE
   projection_evaluator: joints(shoulder_pan_joint,shoulder_lift_joint)
   longest_valid_segment_fraction: 0.01
-gripper:
-  planner_configs:
-    - SBLkConfigDefault
-    - ESTkConfigDefault
-    - LBKPIECEkConfigDefault
-    - BKPIECEkConfigDefault
-    - KPIECEkConfigDefault
-    - RRTkConfigDefault
-    - RRTConnectkConfigDefault
-    - RRTstarkConfigDefault
-    - TRRTkConfigDefault
-    - PRMkConfigDefault
-    - PRMstarkConfigDefault
