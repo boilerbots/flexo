@@ -24,6 +24,28 @@ a Robot Cup soccer team I wanted the base cost to be low. This is one reason
 to choose the K1, and the fact that I love to take "cheap" hardware and
 make it better.
 
+## ROS2 Software
+
+### Build
+The resource on a Raspberry Pi Zero 2 W are very minimal and our modern build tools seem to be very heavy by default so you need to run one job on one package at a time. Use the following commands.
+
+```
+export MAKEFLAGS="-j1"
+colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release --symlink-install --parallel-workers 1 
+```
+
+Also there is a problem with the default fastdds loading plugins which are used for managing controller by MoveIt. Changing to cyclonedds seems to fix the problem. Make sure you install the appropriate packages and rebuild the repository.
+
+Install the following
+```
+apt install ros-rolling-cyclonedds ros-rolling-rmw-cyclonedds-cpp
+```
+
+and in your environment
+```
+export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+```
+
 ## Hardware Details
 
 ### OEM Hardware
