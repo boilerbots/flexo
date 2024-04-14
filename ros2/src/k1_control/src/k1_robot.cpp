@@ -12,8 +12,6 @@
 #include "k1_control/k1_robot.h"
 #include <sys/ioctl.h>
 
-using namespace LibSerial;
-
 namespace k1_control {
 
 /*
@@ -41,8 +39,10 @@ Robot::Robot(const std::string& device) :
 
   conversion = COUNTS_PER_REV / (2 * M_PI);
   RCLCPP_INFO_STREAM(logger_, "Opening: " << device_name_);
-#if 1
-  serial_device_ = open(device_name_.c_str(), O_RDWR);
+  serial_device_ = open(device_name_.c_str(), O_RDWR | O_NOCTTY | O_NONBLOCK);
+  if (serial_device_ < 0) {
+    RCLCPP_ERROR(logger_, "Error open serial device ");
+  }
   // Set the serial port parameters
   termios tty;
   tcgetattr(serial_device_, &tty);
@@ -50,7 +50,7 @@ Robot::Robot(const std::string& device) :
   tty.c_cflag |= CS8;
   tty.c_cflag |= CLOCAL;
   tty.c_cflag |= CREAD;
-  tty.c_cflag &= CSTOPB;
+  tty.c_cflag &= ~CSTOPB;
   tty.c_cflag |= CRTSCTS;
   tty.c_lflag &= ~ICANON;
   tty.c_lflag &= ~PARENB;
@@ -59,7 +59,7 @@ Robot::Robot(const std::string& device) :
   tty.c_oflag &= ~OPOST;
   tty.c_oflag &= ~ONLCR;
   tty.c_cc[VTIME] = 10;
-  tty.c_cc[VMIN] = 1;
+  tty.c_cc[VMIN] = 0;
   cfsetspeed(&tty, B115200);
   if (tcsetattr(serial_device_, TCSANOW, &tty) != 0) {
     RCLCPP_ERROR(logger_, "Error configuring port");
@@ -93,15 +93,10 @@ Robot::Robot(const std::string& device) :
     RCLCPP_ERROR(logger_, "Failed to set RS485 mode");
   }
 
-
-#else
-  serial_device_.Open(device_name_); // device_name_ doesn't work
-  serial_device_.SetBaudRate( BaudRate::BAUD_115200 );
-  serial_device_.SetFlowControl( FlowControl::FLOW_CONTROL_HARDWARE );
-  serial_device_.SetCharacterSize( CharacterSize::CHAR_SIZE_8 );
-  serial_device_.SetStopBits( StopBits::STOP_BITS_1 );
-  serial_device_.SetParity( Parity::PARITY_NONE );
-#endif
+  /* Disable NONBLOCK to make life easy */
+  int flags = fcntl(serial_device_, F_GETFL);
+  flags &= ~O_NONBLOCK;
+  fcntl(serial_device_, F_SETFL, flags);
 
   RCLCPP_INFO_STREAM(logger_, "Start receiving Thread");
   t = std::thread(&Robot::receive, this);
@@ -110,11 +105,7 @@ Robot::Robot(const std::string& device) :
 Robot::~Robot() {
   stopRobot();
   running_ = false;
-#if 0
-  serial_device_.Close();
-#else
   close(serial_device_);
-#endif
 }
 
 void Robot::receive()
@@ -123,26 +114,21 @@ void Robot::receive()
   uint8_t next_byte;
   uint8_t address;
   uint8_t expected_data_len;
-  uint8_t data_len;
+  uint8_t data_len = 0;
   std::vector<uint8_t> data;
+  int read_count;
 
-  RCLCPP_INFO_STREAM(logger_, "Start receiving Loop");
+  RCLCPP_INFO(logger_, "Start receiving Loop");
   running_ = true;
   while(running_) {
-    //RCLCPP_INFO(logger_, "running");
-#if 0
-    try {
-      serial_device_.ReadByte(next_byte, 1000);
-    } catch (LibSerial::ReadTimeout & e) {
+    read_count = read(serial_device_, &next_byte, 1);
+    if (read_count < 1) {
+      RCLCPP_INFO(logger_, "NO DATA");
       continue;
     }
-#else
-    if (read(serial_device_, &next_byte, 1) < 1) {
-      continue;
-    }
-#endif
 
-    RCLCPP_INFO_STREAM(logger_, "state=" << state << " received: " << std::hex << int(next_byte) << std::dec);
+    RCLCPP_INFO(logger_, "read_count=%d", read_count);
+    //RCLCPP_INFO_STREAM(logger_, "state=" << state << " read_count=" << read_count << " received: " << std::hex << int(next_byte) << std::dec);
     switch (state)
     {
       case IDLE:
@@ -190,6 +176,7 @@ void Robot::receive()
       break;
     }
   }
+  RCLCPP_WARN_STREAM(logger_, "\nReceive Thread Terminated\n");
 }
 
 #if 0
@@ -209,16 +196,20 @@ void Robot::send(const std::span<const uint8_t> & data) {
   msg.insert(msg.end(), data.begin(), data.end());
   msg.push_back(add_crc(data));
   RCLCPP_INFO(logger_, "sending: ");
-#if 0
+#if 1
   for (auto d : msg) {
-    //RCLCPP_INFO(logger_, "%x ", d);
-    serial_device_.WriteByte(d);
+    RCLCPP_INFO(logger_, " %x", int(d));
   }
-  serial_device_.FlushOutputBuffer();
-#else
-  write(serial_device_, msg.data(), msg.size());
-  tcdrain(serial_device_);
 #endif
+  uint8_t *dptr = msg.data();
+  int byte_count = msg.size();
+  ssize_t sent; 
+  while (byte_count) {
+    sent = write(serial_device_, dptr, byte_count);
+    dptr += sent;
+    byte_count -= sent;
+  }
+  tcdrain(serial_device_);
 }
 
 void Robot::get_position() {

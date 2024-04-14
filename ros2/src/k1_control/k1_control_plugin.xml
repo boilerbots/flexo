@@ -1,6 +1,5 @@
 <library path="k1_control">
-  <class type="k1_control::RobotSystem"
-         base_class_type="hardware_interface::SystemInterface">
+  <class name="k1_control/RobotSystem" type="k1_control::RobotSystem" base_class_type="hardware_interface::SystemInterface">
     <description>
       Robot hardware plugin for 15 DOF K1 robot.
     </description>

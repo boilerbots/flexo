@@ -10,8 +10,6 @@
 #include <thread>
 #include <span>
 
-#include <libserial/SerialPort.h>
-
 #include <rclcpp/logger.hpp>
 #include "k1_control/k1_robot.h"
 
@@ -64,7 +62,6 @@ class Robot {
   std::string device_name_;
   rclcpp::Logger logger_;
   int serial_device_;
-  //LibSerial::SerialPort serial_device_;
   std::thread t;
   bool running_;
 
