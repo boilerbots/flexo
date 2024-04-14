@@ -10,7 +10,7 @@ My Flexo is project is a ROS2 project for a humanoid robot that I created
 by hacking a Raspberry pi zero 2 W onto a 
 [Robosen K1](https://www.robosen.com/us/k1-pro-interstellar-scout). 
 A K1 is a 17 servo robot that you can buy for between $199 and $299 depending 
-on special deal days. This price is substantially lower than any other sevo 
+on special deal days. This price is substantially lower than any other servo 
 robot kit on the market currently.
 
 However the K1 is designed to be a toy out of the box. There is some
