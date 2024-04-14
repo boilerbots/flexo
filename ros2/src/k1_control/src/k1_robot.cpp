@@ -36,7 +36,7 @@ Robot::Robot(const std::string& device) :
   device_name_(device),
   logger_(rclcpp::get_logger("k1_robot")),
   running_(false) ,
-  receive_count(0)
+  receive_message_count(0)
 {
 
   conversion = COUNTS_PER_REV / (2 * M_PI);
@@ -50,7 +50,7 @@ Robot::Robot(const std::string& device) :
   tty.c_cflag |= CS8;
   tty.c_cflag |= CLOCAL;
   tty.c_cflag |= CREAD;
-  tty.c_cflag |= CSTOPB;
+  tty.c_cflag &= CSTOPB;
   tty.c_cflag |= CRTSCTS;
   tty.c_lflag &= ~ICANON;
   tty.c_lflag &= ~PARENB;
@@ -59,7 +59,7 @@ Robot::Robot(const std::string& device) :
   tty.c_oflag &= ~OPOST;
   tty.c_oflag &= ~ONLCR;
   tty.c_cc[VTIME] = 10;
-  tty.c_cc[VMIN] = 0;
+  tty.c_cc[VMIN] = 1;
   cfsetspeed(&tty, B115200);
   if (tcsetattr(serial_device_, TCSANOW, &tty) != 0) {
     RCLCPP_ERROR(logger_, "Error configuring port");
@@ -142,21 +142,24 @@ void Robot::receive()
     }
 #endif
 
-    RCLCPP_INFO(logger_, "received: %x", next_byte);
+    RCLCPP_INFO_STREAM(logger_, "state=" << state << " received: " << std::hex << int(next_byte) << std::dec);
     switch (state)
     {
       case IDLE:
-        if (next_byte == 255) {
+        if (next_byte == 0xFF) {
           state = START1;
         }
       break;
       case START1:
-        if (next_byte == 255) {
+        if (next_byte == 0xFF) {
           state = START2;
+        } else {
+          state = IDLE;  // start over
         }
       break;
       case START2:
         address = next_byte;
+        data.clear();
         data.push_back(address);
         state = ADDRESS;
       break;
@@ -177,10 +180,10 @@ void Robot::receive()
           }
           if (data[2] == 0xA3) {
             uint16_t position = (data[3] * 256) + data[4] + CORRECTION;
-            RCLCPP_INFO(logger_, "channel %d  position %d", address, position);
+            RCLCPP_INFO(logger_, "channel %d  position %d", int(address), int(position));
             hw_lock.lock();
             current_position[address] = position;
-            ++receive_count;
+            ++receive_message_count;
             hw_lock.unlock();
           } 
         }
@@ -224,10 +227,10 @@ void Robot::get_position() {
   for (int channel = 0; channel < REAL_CHANNELS; channel++) {
     local_position[0] = channel;
     std::span<const uint8_t> msg(local_position);
-    last_receive_count = receive_count;
+    last_receive_count = receive_message_count;
     send(msg);
     usleep(10000);
-    while (last_receive_count == receive_count) {
+    while (last_receive_count == receive_message_count) {
       RCLCPP_WARN(logger_, "waiting for position");
       usleep(1000000);
       send(msg);

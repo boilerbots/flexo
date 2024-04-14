@@ -36,6 +36,7 @@ endforeach()
 foreach(Dependency IN ITEMS ${CONTROLLER_INCLUDE_DEPENDS})
   find_package(${Dependency} REQUIRED)
 endforeach()
+pluginlib_export_plugin_description_file(k1_control k1_control_plugin.xml)
 
 add_library(
   k1_control
@@ -60,10 +61,9 @@ ament_target_dependencies(
 )
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE "K1_CONTROL_BUILDING_DLL")
-pluginlib_export_plugin_description_file(k1_control k1_control_plugin.xml)
 
 install(TARGETS k1_control
-  EXPORT export_k1_control
+  EXPORT export_${PROJECT_NAME}
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin
@@ -81,7 +81,8 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
+# ament_export_libraries(k1_control)
 ament_export_targets(export_k1_control HAS_LIBRARY_TARGET)
-ament_export_dependencies(${THIS_PACKAGE_INCLUDE_DEPENDS})
+# ament_export_dependencies(${THIS_PACKAGE_INCLUDE_DEPENDS})
 ament_export_dependencies(${HW_IF_INCLUDE_DEPENDS} ${REF_GEN_INCLUDE_DEPENDS} ${CONTROLLER_INCLUDE_DEPENDS})
 ament_package()
