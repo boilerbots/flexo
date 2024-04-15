@@ -73,7 +73,8 @@ class Robot {
   const std::array<uint8_t, 3> initialize = {250, 2, 7};
   const std::array<uint8_t, 4> enable = {254, 3, 2, 1};
   const std::array<uint8_t, 4> disable = {254, 3,2, 0};
-  const std::array<uint8_t, 3> position = {0, 2, 3};
+  const std::array<uint8_t, 3> read_position = {0, 2, 3};
+  const std::array<uint8_t, 3> set_all_position = {254, 50, 254};
   // home_position is in 16 bit format
   const std::array<uint16_t, 24> home_position = {
     467,

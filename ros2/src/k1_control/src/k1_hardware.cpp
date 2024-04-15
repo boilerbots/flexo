@@ -152,8 +152,8 @@ return_type RobotSystem::read(const rclcpp::Time & /*time*/, const rclcpp::Durat
 
 return_type RobotSystem::write(const rclcpp::Time &, const rclcpp::Duration &)
 {
-#if 0
   robot_->writeJointPositions(joint_position_command_);
+#if 0
   rclcpp::Logger logger = rclcpp::get_logger("k1_hardware");
   for (auto i = 0ul; i < joint_position_command_.size(); i++)
   {
