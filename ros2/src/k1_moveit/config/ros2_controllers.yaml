@@ -1,7 +1,7 @@
 # This config file is used by ros2_control
 controller_manager:
   ros__parameters:
-    update_rate: 100  # Hz
+    update_rate: 10  # Hz
 
     k1_right_leg_controller:
       type: joint_trajectory_controller/JointTrajectoryController
@@ -32,6 +32,8 @@ controller_manager:
 
 k1_right_leg_controller:
   ros__parameters:
+    open_loop_control: true
+    allow_partial_joints_goal: true
     joints:
       - right_hip
       - right_thigh
@@ -45,6 +47,8 @@ k1_right_leg_controller:
       - velocity
 k1_left_leg_controller:
   ros__parameters:
+    open_loop_control: true
+    allow_partial_joints_goal: true
     joints:
       - left_hip
       - left_thigh
@@ -58,6 +62,8 @@ k1_left_leg_controller:
       - velocity
 k1_right_arm_controller:
   ros__parameters:
+    open_loop_control: true
+    allow_partial_joints_goal: true
     joints:
       - right_shoulder
       - right_upper
@@ -69,6 +75,8 @@ k1_right_arm_controller:
       - velocity
 k1_left_arm_controller:
   ros__parameters:
+    open_loop_control: true
+    allow_partial_joints_goal: true
     joints:
       - left_shoulder
       - left_arm_upper
@@ -80,6 +88,8 @@ k1_left_arm_controller:
       - velocity
 k1_robot_controller:
   ros__parameters:
+    open_loop_control: true
+    allow_partial_joints_goal: true
     joints:
       - left_hip
       - left_thigh
@@ -105,6 +115,8 @@ k1_robot_controller:
       - velocity
 k1_head_controller:
   ros__parameters:
+    open_loop_control: true
+    allow_partial_joints_goal: true
     joints:
       - head
     command_interfaces:

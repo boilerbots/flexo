@@ -123,11 +123,11 @@ void Robot::receive()
   while(running_) {
     read_count = read(serial_device_, &next_byte, 1);
     if (read_count < 1) {
-      RCLCPP_INFO(logger_, "NO DATA");
+      //RCLCPP_INFO(logger_, "NO DATA");
       continue;
     }
 
-    RCLCPP_INFO(logger_, "read_count=%d", read_count);
+    //RCLCPP_INFO(logger_, "read_count=%d", read_count);
     //RCLCPP_INFO_STREAM(logger_, "state=" << state << " read_count=" << read_count << " received: " << std::hex << int(next_byte) << std::dec);
     switch (state)
     {
@@ -195,8 +195,8 @@ void Robot::send(const std::span<const uint8_t> & data) {
   std::vector<uint8_t> msg = {255, 255};
   msg.insert(msg.end(), data.begin(), data.end());
   msg.push_back(add_crc(data));
-  RCLCPP_INFO(logger_, "sending: ");
-#if 1
+  //RCLCPP_INFO(logger_, "sending: ");
+#if 0
   for (auto d : msg) {
     RCLCPP_INFO(logger_, " %x", int(d));
   }
@@ -214,7 +214,7 @@ void Robot::send(const std::span<const uint8_t> & data) {
 
 void Robot::get_position() {
   int last_receive_count;
-  std::vector<uint8_t> local_position(position.begin(), position.end());
+  std::vector<uint8_t> local_position(read_position.begin(), read_position.end());
   for (int channel = 0; channel < REAL_CHANNELS; channel++) {
     local_position[0] = channel;
     std::span<const uint8_t> msg(local_position);
@@ -257,9 +257,19 @@ void Robot::writeJointPositions(const std::vector<double>& position) {
   //std::lock_guard<std::mutex> lock(control_mutex_);
   hw_lock.lock();
   for (int xx = 0; xx < REAL_CHANNELS; ++xx) {
+#if 0
+    if (xx == 16) {
+      RCLCPP_WARN(logger_, "ch=%d  pos=%lf", xx, position[xx]);
+    }
+#endif
     current_position[xx] = home_position[xx] - (position[xx] * conversion);
   }
   hw_lock.unlock();
+  compute_hwval();
+  std::vector<uint8_t> local_position(set_all_position.begin(), set_all_position.end());
+  local_position.insert(local_position.end(), hw_val.begin(), hw_val.end());
+  std::span<const uint8_t> msg(local_position);
+  send(std::span<const uint8_t>(msg));
 }
 
 #if 0
