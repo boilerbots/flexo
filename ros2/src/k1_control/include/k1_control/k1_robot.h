@@ -68,7 +68,7 @@ class Robot {
   static const int MAX_CHANNELS = 24;
   static const int REAL_CHANNELS = 17;
   static const int CORRECTION = -50;
-  static const int COUNTS_PER_REV = 1200; // just guessing
+  static const int COUNTS_PER_REV = 1000; // just guessing
 
   const std::array<uint8_t, 3> initialize = {250, 2, 7};
   const std::array<uint8_t, 4> enable = {254, 3, 2, 1};

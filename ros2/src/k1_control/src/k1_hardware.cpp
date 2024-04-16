@@ -27,27 +27,6 @@ CallbackReturn RobotSystem::on_init(const hardware_interface::HardwareInfo & inf
   std::string servo_config_file("servo_config.yaml");
   std::string pose_file("poses.yaml");
 
-#if 0
-  auto package_path = ament_index_cpp::get_package_share_directory("k1");
-  package_path += "/config/" + servo_config_file;
-  RCLCPP_INFO_STREAM(logger, "Loading YAML: " << package_path);
-  YAML::Node servo_config = YAML::LoadFile(package_path);
-  //RCLCPP_INFO_STREAM(logger, "Config: " << servo_config[0].as<std::string>());
-  //RCLCPP_INFO_STREAM(logger, "Size: " << servo_config.size());
-  for (int xx = 0; auto itr : servo_config["initialize"]) {
-    //RCLCPP_INFO_STREAM(logger, "found: " << it.as<int>() << "\n");
-    initialize[xx++] = itr.as<int>();
-  }
-  for (int xx = 0; auto itr : servo_config["enable"]) {
-    enable[xx++] = itr.as<int>();
-  }
-  for (int xx = 0; auto itr : servo_config["disable"]) {
-    disable[xx++] = itr.as<int>();
-  }
-  for (int xx = 0; auto itr : servo_config["get_position"]) {
-    get_position[xx++] = itr.as<int>();
-  }
-#endif
 
   // robot has 17 joints
   joint_position_.assign(17, 0);
@@ -155,9 +134,10 @@ return_type RobotSystem::write(const rclcpp::Time &, const rclcpp::Duration &)
   robot_->writeJointPositions(joint_position_command_);
 #if 0
   rclcpp::Logger logger = rclcpp::get_logger("k1_hardware");
+  RCLCPP_INFO(logger, "#######");
   for (auto i = 0ul; i < joint_position_command_.size(); i++)
   {
-    RCLCPP_INFO(logger, "position %lf", joint_position_command_[i]);
+    RCLCPP_INFO(logger, "  %lf", joint_position_command_[i]);
   }
 #endif
 
