@@ -455,6 +455,34 @@
     <axis xyz="0 1 0" />
     <limit lower="-3.0" upper="3.0" effort="1000" velocity="3.0" />
   </joint>
+  <link name="right_hand_link">
+    <inertial>
+      <origin xyz="-0.00274751358458329 -2.60208521396521E-18 0.0122930084282204" rpy="0 0 0" />
+      <mass value="0.00889972732481042" />
+      <inertia ixx="1.20252640088182E-06" ixy="-2.53130192138298E-23" ixz="1.67669592897643E-07" iyy="1.14137172758277E-06" iyz="1.91905902112302E-22" izz="7.3055800721365E-07" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://k1_description/meshes/visual/right_hand_link.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://k1_description/meshes/collision/right_hand_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="right_hand_joint" type="fixed">
+    <origin xyz="0.0269999999999999 0 0" rpy="-1.5707963267949 0 -1.5707963267949" />
+    <parent link="right_arm_lower_link" />
+    <child link="right_hand_link" />
+    <axis xyz="0 0 0" />
+  </joint>
   <link name="left_arm_link">
     <inertial>
       <origin xyz="-7.7715611723761E-16 -0.0259259508257144 3.45209971719385E-16" rpy="0 0 0" />
