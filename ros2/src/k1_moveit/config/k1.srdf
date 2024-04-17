@@ -10,32 +10,32 @@
     <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
     <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
     <group name="k1_right_leg">
-        <link name="right_foot_link"/>
         <joint name="right_hip"/>
         <joint name="right_thigh"/>
         <joint name="right_knee"/>
         <joint name="right_calf"/>
         <joint name="right_ankle"/>
+        <chain base_link="base_link" tip_link="right_foot_link"/>
     </group>
     <group name="k1_left_leg">
-        <link name="left_foot_link"/>
         <joint name="left_hip"/>
         <joint name="left_thigh"/>
         <joint name="left_knee"/>
         <joint name="left_calf"/>
         <joint name="left_ankle"/>
+        <chain base_link="base_link" tip_link="left_foot_link"/>
     </group>
     <group name="k1_right_arm">
-        <link name="right_hand_link"/>
         <joint name="right_shoulder"/>
         <joint name="right_upper"/>
         <joint name="right_arm_lower"/>
+        <chain base_link="base_link" tip_link="right_hand_link"/>
     </group>
     <group name="k1_left_arm">
-        <link name="left_hand_link"/>
         <joint name="left_shoulder"/>
         <joint name="left_arm_upper"/>
         <joint name="left_arm_lower"/>
+        <chain base_link="base_link" tip_link="left_hand_link"/>
     </group>
     <group name="k1_robot">
         <group name="k1_right_leg"/>
