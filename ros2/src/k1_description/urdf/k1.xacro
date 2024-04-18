@@ -189,11 +189,11 @@
       </geometry>
     </collision>
   </link>
-  <joint name="right_foot_joint" type="revolute">
+  <joint name="right_foot_joint" type="fixed">
     <origin xyz="-0.0141935477215366 0.00487500000000001 0.0241824978667717" rpy="-1.55807601714472 0 1.5707963267949" />
     <parent link="right_ankle_link" />
     <child link="right_foot_link" />
-    <axis xyz="0 1 0" />
+    <axis xyz="0 0 0" />
   </joint>
   <link name="left_hip_link">
     <inertial>
@@ -362,11 +362,11 @@
       </geometry>
     </collision>
   </link>
-  <joint name="left_foot_joint" type="revolute">
+  <joint name="left_foot_joint" type="fixed">
     <origin xyz="-0.0254952367690822 0.0113755745672261 0.00285705310295755" rpy="-0.0314669727072048 0 -1.5707963267949" />
     <parent link="left_ankle_link" />
     <child link="left_foot_link" />
-    <axis xyz="0 1 0" />
+    <axis xyz="0 0 0" />
   </joint>
   <link name="right_arm_link">
     <inertial>
@@ -477,11 +477,11 @@
       </geometry>
     </collision>
   </link>
-  <joint name="right_hand_joint" type="revolute">
+  <joint name="right_hand_joint" type="fixed">
     <origin xyz="0.0269999999999999 0 0" rpy="-1.5707963267949 0 -1.5707963267949" />
     <parent link="right_arm_lower_link" />
     <child link="right_hand_link" />
-    <axis xyz="0 1 0" />
+    <axis xyz="0 0 0" />
   </joint>
   <link name="left_arm_link">
     <inertial>
@@ -592,11 +592,11 @@
       </geometry>
     </collision>
   </link>
-  <joint name="left_hand_joint" type="revolute">
+  <joint name="left_hand_joint" type="fixed">
     <origin xyz="0.0269999999999999 0 0" rpy="-1.5707963267949 0 -1.57079632679489" />
     <parent link="left_arm_lower_link" />
     <child link="left_hand_link" />
-    <axis xyz="0 1 0" />
+    <axis xyz="0 0 0" />
   </joint>
   <link name="head_link">
     <inertial>
