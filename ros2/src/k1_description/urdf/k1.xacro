@@ -420,7 +420,7 @@
     </collision>
   </link>
   <joint name="right_upper" type="revolute">
-    <origin xyz="0 0.0350000000000004 0" rpy="1.56989921107132 -0.00259316215202615 -0.33306656840474" />
+    <origin xyz="0 -0.0350000000000004 0" rpy="1.56989921107132 0.00259316215202615 0.33306656840474" />
     <parent link="right_arm_link" />
     <child link="right_arm_upper_link" />
     <axis xyz="0 1 0" />
@@ -624,7 +624,7 @@
     <origin xyz="-0.011 0 0.086" rpy="1.5707963267949 0 1.5707963267949" />
     <parent link="base_link" />
     <child link="head_link" />
-    <axis xyz="0 -1 0" />
+    <axis xyz="0 1 0" />
     <limit lower="-6.28" upper="6.28" effort="1.0" velocity="1.0" />
   </joint>
   <link name="face_link">
@@ -650,7 +650,7 @@
     </collision>
   </link>
   <joint name="face_joint" type="fixed">
-    <origin xyz="0 0 0" rpy="3.14159265358979 0 0" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
     <parent link="head_link" />
     <child link="face_link" />
     <axis xyz="0 0 0" />
