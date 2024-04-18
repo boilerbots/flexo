@@ -394,7 +394,7 @@
     <origin xyz="-0.007 -0.026 0.075" rpy="3.1416 -1.5708 0" />
     <parent link="base_link" />
     <child link="right_arm_link" />
-    <axis xyz="0 1 0" />
+    <axis xyz="0 -1 0" />
     <limit lower="-6.28" upper="6.28" effort="1.0" velocity="1.0" />
   </joint>
   <link name="right_arm_upper_link">
