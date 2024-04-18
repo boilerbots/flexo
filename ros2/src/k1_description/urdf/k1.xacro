@@ -391,7 +391,7 @@
     </collision>
   </link>
   <joint name="right_shoulder" type="revolute">
-    <origin xyz="-0.007 -0.026 0.075" rpy="3.1416 -1.5708 0" />
+    <origin xyz="-0.007 -0.026 0.075" rpy="3.1416 1.5708 0" />
     <parent link="base_link" />
     <child link="right_arm_link" />
     <axis xyz="0 -1 0" />
@@ -420,7 +420,7 @@
     </collision>
   </link>
   <joint name="right_upper" type="revolute">
-    <origin xyz="0 0.0350000000000004 0" rpy="1.56989921107132 0.00259316215202615 0.23306656840474" />
+    <origin xyz="0 0.0350000000000004 0" rpy="1.56989921107132 0.00259316215202615 3.54" />
     <parent link="right_arm_link" />
     <child link="right_arm_upper_link" />
     <axis xyz="0 1 0" />
@@ -449,10 +449,10 @@
     </collision>
   </link>
   <joint name="right_arm_lower" type="revolute">
-    <origin xyz="-0.0667804560220959 0 -0.0209850111622641" rpy="1.5864967516128 0.304075688258208 -3.0891987069566" />
+    <origin xyz="-0.0667804560220959 0 -0.0209850111622641" rpy="-1.5864967516128 0.304075688258208 3.0891987069566" />
     <parent link="right_arm_upper_link" />
     <child link="right_arm_lower_link" />
-    <axis xyz="0 1 0" />
+    <axis xyz="0 -1 0" />
     <limit lower="-6.28" upper="6.28" effort="1.0" velocity="1.0" />
   </joint>
   <link name="right_hand_link">
