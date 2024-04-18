@@ -420,7 +420,7 @@
     </collision>
   </link>
   <joint name="right_upper" type="revolute">
-    <origin xyz="0 -0.0350000000000004 0" rpy="1.56989921107132 0.00259316215202615 0.33306656840474" />
+    <origin xyz="0 0.0350000000000004 0" rpy="1.56989921107132 0.00259316215202615 0.23306656840474" />
     <parent link="right_arm_link" />
     <child link="right_arm_upper_link" />
     <axis xyz="0 1 0" />
@@ -535,7 +535,7 @@
     </collision>
   </link>
   <joint name="left_arm_upper" type="revolute">
-    <origin xyz="0 -0.0350000000000004 0" rpy="-1.57169344251847 0.00259316215202667 0.33306656840474" />
+    <origin xyz="0 -0.0350000000000004 0" rpy="-1.57169344251847 0.00259316215202667 -0.10306656840474" />
     <parent link="left_arm_link" />
     <child link="left_arm_upper_link" />
     <axis xyz="0 1 0" />
