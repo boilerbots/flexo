@@ -119,12 +119,15 @@ return_type RobotSystem::read(const rclcpp::Time & /*time*/, const rclcpp::Durat
   }
 #endif
 
+#if 0
   for (auto i = 0ul; i < joint_position_command_.size(); i++)
   {
     //RCLCPP_INFO(logger, "%d position %lf", i, joint_position_command_[i]);
     joint_position_[i] = joint_position_command_[i];
     //joint_position_[i] = i * 0.1;
   }
+#endif
+  robot_->readJointPositions(joint_position_);
 
   return return_type::OK;
 }
@@ -152,6 +155,14 @@ return_type RobotSystem::perform_command_mode_switch(
   rclcpp::Logger logger = rclcpp::get_logger("k1_hardware");
   RCLCPP_INFO(logger, "\n\n Starting Robot \n\n");
   robot_->startRobot();
+
+  robot_->readJointPositions(joint_position_);
+  for (auto i = 0ul; i < joint_position_command_.size(); i++)
+  {
+    //RCLCPP_INFO(logger, "%d position %lf", i, joint_position_command_[i]);
+    joint_position_command_[i] = joint_position_[i];
+  }
+
   return return_type::OK;
 }
 #endif

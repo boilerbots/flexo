@@ -17,10 +17,6 @@ namespace k1_control {
 
 class Robot {
  public:
-  /**
-   * @param[in] robot_ip IP address or hostname of the robot.
-   * @param[im] logger ROS Logger to print eventual warnings.
-   */
   explicit Robot(const std::string& device);
   Robot(const Robot&) = delete;
   Robot& operator=(const Robot& other) = delete;
@@ -33,20 +29,8 @@ class Robot {
   void stopRobot();
   void startRobot();
 
-  /**
-   * Get the current robot state
-   * @return current robot state.
-   */
-  //virtual franka::RobotState readOnce();
-
-  /**
-   * Return pointer to the franka robot model object .
-   * @return pointer to the current robot model.
-   */
-  //virtual franka_hardware::Model* getModel();
-
-  //virtual void writeOnce(const std::array<double, 17>& joint_hardware_command);
   void writeJointPositions(const std::vector<double>& position);
+  void readJointPositions(std::vector<double>& position);
 
  protected:
   Robot() = default;

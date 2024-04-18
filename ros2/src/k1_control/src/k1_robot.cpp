@@ -272,12 +272,12 @@ void Robot::writeJointPositions(const std::vector<double>& position) {
   send(std::span<const uint8_t>(msg));
 }
 
-#if 0
-k1_control::RobotState Robot::readOnceActiveControl() {
-  // When controller is active use active control to read the robot state
-  const auto [current_state, _] = active_control_->readOnce();
-  return current_state;
+void Robot::readJointPositions(std::vector<double>& position) {
+  hw_lock.lock();
+  for (int xx = 0; xx < REAL_CHANNELS; ++xx) {
+    //current_position[xx] = home_position[xx] - (position[xx] * conversion);
+    position[xx] = (home_position[xx] - current_position[xx]) / conversion;
+  }
+  hw_lock.unlock();
 }
-#endif
-
 }
