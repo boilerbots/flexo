@@ -5,129 +5,133 @@
 
         <ros2_control name="${name}" type="system">
             <hardware>
-                <!--<plugin>mock_components/GenericSystem</plugin>-->
+                <!-- By default, set up controllers for simulation. This won't work on real hardware -->
+<!--
+                <plugin>mock_components/GenericSystem</plugin>
+-->
                 <plugin>k1_control/RobotSystem</plugin>
                 <param name="device">/dev/ttyAMA0</param>
             </hardware>
-            <joint name="left_thigh">
+            <joint name="right_hip_joint">
                 <command_interface name="position"/>
                 <state_interface name="position">
-                  <param name="initial_value">${initial_positions['left_thigh']}</param>
+                  <param name="initial_value">${initial_positions['right_hip_joint']}</param>
                 </state_interface>
                 <state_interface name="velocity"/>
             </joint>
-            <joint name="left_knee">
+            <joint name="right_thigh_joint">
                 <command_interface name="position"/>
                 <state_interface name="position">
-                  <param name="initial_value">${initial_positions['left_knee']}</param>
+                  <param name="initial_value">${initial_positions['right_thigh_joint']}</param>
                 </state_interface>
                 <state_interface name="velocity"/>
             </joint>
-            <joint name="left_calf">
+            <joint name="right_knee_joint">
                 <command_interface name="position"/>
                 <state_interface name="position">
-                  <param name="initial_value">${initial_positions['left_calf']}</param>
+                  <param name="initial_value">${initial_positions['right_knee_joint']}</param>
                 </state_interface>
                 <state_interface name="velocity"/>
             </joint>
-            <joint name="right_thigh">
+            <joint name="right_calf_joint">
                 <command_interface name="position"/>
                 <state_interface name="position">
-                  <param name="initial_value">${initial_positions['right_thigh']}</param>
+                  <param name="initial_value">${initial_positions['right_calf_joint']}</param>
                 </state_interface>
                 <state_interface name="velocity"/>
             </joint>
-            <joint name="right_knee">
+            <joint name="right_ankle_joint">
                 <command_interface name="position"/>
                 <state_interface name="position">
-                  <param name="initial_value">${initial_positions['right_knee']}</param>
+                  <param name="initial_value">${initial_positions['right_ankle_joint']}</param>
                 </state_interface>
                 <state_interface name="velocity"/>
             </joint>
-            <joint name="right_calf">
+            <joint name="left_hip_joint">
                 <command_interface name="position"/>
                 <state_interface name="position">
-                  <param name="initial_value">${initial_positions['right_calf']}</param>
+                  <param name="initial_value">${initial_positions['left_hip_joint']}</param>
                 </state_interface>
                 <state_interface name="velocity"/>
             </joint>
-            <joint name="left_shoulder">
+            <joint name="left_thigh_joint">
                 <command_interface name="position"/>
                 <state_interface name="position">
-                  <param name="initial_value">${initial_positions['left_shoulder']}</param>
+                  <param name="initial_value">${initial_positions['left_thigh_joint']}</param>
                 </state_interface>
                 <state_interface name="velocity"/>
             </joint>
-            <joint name="right_shoulder">
+            <joint name="left_knee_joint">
                 <command_interface name="position"/>
                 <state_interface name="position">
-                  <param name="initial_value">${initial_positions['right_shoulder']}</param>
+                  <param name="initial_value">${initial_positions['left_knee_joint']}</param>
                 </state_interface>
                 <state_interface name="velocity"/>
             </joint>
-            <joint name="left_hip">
+            <joint name="left_calf_joint">
                 <command_interface name="position"/>
                 <state_interface name="position">
-                  <param name="initial_value">${initial_positions['left_hip']}</param>
+                  <param name="initial_value">${initial_positions['left_calf_joint']}</param>
                 </state_interface>
                 <state_interface name="velocity"/>
             </joint>
-            <joint name="left_ankle">
+            <joint name="left_ankle_joint">
                 <command_interface name="position"/>
                 <state_interface name="position">
-                  <param name="initial_value">${initial_positions['left_ankle']}</param>
+                  <param name="initial_value">${initial_positions['left_ankle_joint']}</param>
                 </state_interface>
                 <state_interface name="velocity"/>
             </joint>
-            <joint name="right_hip">
+            <joint name="right_shoulder_joint">
                 <command_interface name="position"/>
                 <state_interface name="position">
-                  <param name="initial_value">${initial_positions['right_hip']}</param>
+                  <param name="initial_value">${initial_positions['right_shoulder_joint']}</param>
                 </state_interface>
                 <state_interface name="velocity"/>
             </joint>
-            <joint name="right_ankle">
+            <joint name="right_upper_arm_joint">
                 <command_interface name="position"/>
                 <state_interface name="position">
-                  <param name="initial_value">${initial_positions['right_ankle']}</param>
+                  <param name="initial_value">${initial_positions['right_upper_arm_joint']}</param>
                 </state_interface>
                 <state_interface name="velocity"/>
             </joint>
-            <joint name="left_arm_upper">
+            <joint name="right_lower_arm_joint">
                 <command_interface name="position"/>
                 <state_interface name="position">
-                  <param name="initial_value">${initial_positions['left_arm_upper']}</param>
+                  <param name="initial_value">${initial_positions['right_lower_arm_joint']}</param>
                 </state_interface>
                 <state_interface name="velocity"/>
             </joint>
-            <joint name="left_arm_lower">
+            <joint name="left_shoulder_joint">
                 <command_interface name="position"/>
                 <state_interface name="position">
-                  <param name="initial_value">${initial_positions['left_arm_lower']}</param>
+                  <param name="initial_value">${initial_positions['left_shoulder_joint']}</param>
                 </state_interface>
                 <state_interface name="velocity"/>
             </joint>
-            <joint name="right_upper">
+            <joint name="left_upper_arm_joint">
                 <command_interface name="position"/>
                 <state_interface name="position">
-                  <param name="initial_value">${initial_positions['right_upper']}</param>
+                  <param name="initial_value">${initial_positions['left_upper_arm_joint']}</param>
                 </state_interface>
                 <state_interface name="velocity"/>
             </joint>
-            <joint name="right_arm_lower">
+            <joint name="left_lower_arm_joint">
                 <command_interface name="position"/>
                 <state_interface name="position">
-                  <param name="initial_value">${initial_positions['right_arm_lower']}</param>
+                  <param name="initial_value">${initial_positions['left_lower_arm_joint']}</param>
                 </state_interface>
                 <state_interface name="velocity"/>
             </joint>
-            <joint name="head">
+            <joint name="head_joint">
                 <command_interface name="position"/>
                 <state_interface name="position">
-                  <param name="initial_value">${initial_positions['head']}</param>
+                  <param name="initial_value">${initial_positions['head_joint']}</param>
                 </state_interface>
                 <state_interface name="velocity"/>
             </joint>
+
         </ros2_control>
     </xacro:macro>
 </robot>

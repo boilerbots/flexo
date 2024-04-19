@@ -1,7 +1,7 @@
 # This config file is used by ros2_control
 controller_manager:
   ros__parameters:
-    update_rate: 100 # Hz
+    update_rate: 100  # Hz
 
     k1_right_leg_controller:
       type: joint_trajectory_controller/JointTrajectoryController
@@ -35,11 +35,11 @@ k1_right_leg_controller:
     open_loop_control: true
     allow_partial_joints_goal: true
     joints:
-      - right_hip
-      - right_thigh
-      - right_knee
-      - right_calf
-      - right_ankle
+      - right_hip_joint
+      - right_thigh_joint
+      - right_knee_joint
+      - right_calf_joint
+      - right_ankle_joint
     command_interfaces:
       - position
     state_interfaces:
@@ -50,11 +50,11 @@ k1_left_leg_controller:
     open_loop_control: true
     allow_partial_joints_goal: true
     joints:
-      - left_hip
-      - left_thigh
-      - left_knee
-      - left_calf
-      - left_ankle
+      - left_hip_joint
+      - left_thigh_joint
+      - left_knee_joint
+      - left_calf_joint
+      - left_ankle_joint
     command_interfaces:
       - position
     state_interfaces:
@@ -65,9 +65,9 @@ k1_right_arm_controller:
     open_loop_control: true
     allow_partial_joints_goal: true
     joints:
-      - right_shoulder
-      - right_upper
-      - right_arm_lower
+      - right_shoulder_joint
+      - right_upper_arm_joint
+      - right_lower_arm_joint
     command_interfaces:
       - position
     state_interfaces:
@@ -78,9 +78,9 @@ k1_left_arm_controller:
     open_loop_control: true
     allow_partial_joints_goal: true
     joints:
-      - left_shoulder
-      - left_arm_upper
-      - left_arm_lower
+      - left_shoulder_joint
+      - left_upper_arm_joint
+      - left_lower_arm_joint
     command_interfaces:
       - position
     state_interfaces:
@@ -91,23 +91,23 @@ k1_robot_controller:
     open_loop_control: true
     allow_partial_joints_goal: true
     joints:
-      - left_hip
-      - left_thigh
-      - left_knee
-      - left_calf
-      - left_ankle
-      - left_shoulder
-      - left_arm_upper
-      - left_arm_lower
-      - right_hip
-      - right_thigh
-      - right_knee
-      - right_calf
-      - right_ankle
-      - right_shoulder
-      - right_upper
-      - right_arm_lower
-      - head
+      - left_hip_joint
+      - left_thigh_joint
+      - left_knee_joint
+      - left_calf_joint
+      - left_ankle_joint
+      - left_shoulder_joint
+      - left_upper_arm_joint
+      - left_lower_arm_joint
+      - right_hip_joint
+      - right_thigh_joint
+      - right_knee_joint
+      - right_calf_joint
+      - right_ankle_joint
+      - right_shoulder_joint
+      - right_upper_arm_joint
+      - right_lower_arm_joint
+      - head_joint
     command_interfaces:
       - position
     state_interfaces:

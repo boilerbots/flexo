@@ -1,36 +1,38 @@
 # MoveIt uses this configuration for controller management
+
 trajectory_execution:
   allowed_execution_duration_scaling: 1.2
   allowed_goal_duration_margin: 0.5
   allowed_start_tolerance: 0.1
   trajectory_duration_monitoring: true
-
-moveit_manage_controllers: true
 moveit_controller_manager: moveit_simple_controller_manager/MoveItSimpleControllerManager
 
+moveit_manage_controllers: true
 moveit_simple_controller_manager:
   controller_names:
     - k1_robot_controller
 
   k1_robot_controller:
-    action_ns: follow_joint_trajectory
     type: FollowJointTrajectory
+    action_ns: follow_joint_trajectory
     default: true
     joints:
-      - left_hip
-      - left_thigh
-      - left_knee
-      - left_calf
-      - left_ankle
-      - left_shoulder
-      - left_arm_upper
-      - left_arm_lower
-      - right_hip
-      - right_thigh
-      - right_knee
-      - right_calf
-      - right_ankle
-      - right_shoulder
-      - right_upper
-      - right_arm_lower
-      - head
+      - left_hip_joint
+      - left_thigh_joint
+      - left_knee_joint
+      - left_calf_joint
+      - left_ankle_joint
+      - left_shoulder_joint
+      - left_upper_arm_joint
+      - left_lower_arm_joint
+      - right_hip_joint
+      - right_thigh_joint
+      - right_knee_joint
+      - right_calf_joint
+      - right_ankle_joint
+      - right_shoulder_joint
+      - right_upper_arm_joint
+      - right_lower_arm_joint
+      - head_joint
+    action_ns: follow_joint_trajectory
+    default: true

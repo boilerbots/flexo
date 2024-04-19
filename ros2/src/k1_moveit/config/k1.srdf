@@ -10,32 +10,28 @@
     <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
     <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
     <group name="k1_right_leg">
-        <joint name="right_hip"/>
-        <joint name="right_thigh"/>
-        <joint name="right_knee"/>
-        <joint name="right_calf"/>
-        <joint name="right_ankle"/>
-        <chain base_link="base_link" tip_link="right_foot_link"/>
+        <joint name="right_hip_joint"/>
+        <joint name="right_thigh_joint"/>
+        <joint name="right_knee_joint"/>
+        <joint name="right_calf_joint"/>
+        <joint name="right_ankle_joint"/>
     </group>
     <group name="k1_left_leg">
-        <joint name="left_hip"/>
-        <joint name="left_thigh"/>
-        <joint name="left_knee"/>
-        <joint name="left_calf"/>
-        <joint name="left_ankle"/>
-        <chain base_link="base_link" tip_link="left_foot_link"/>
+        <joint name="left_hip_joint"/>
+        <joint name="left_thigh_joint"/>
+        <joint name="left_knee_joint"/>
+        <joint name="left_calf_joint"/>
+        <joint name="left_ankle_joint"/>
     </group>
     <group name="k1_right_arm">
-        <joint name="right_shoulder"/>
-        <joint name="right_upper"/>
-        <joint name="right_arm_lower"/>
-        <chain base_link="base_link" tip_link="right_hand_link"/>
+        <joint name="right_shoulder_joint"/>
+        <joint name="right_upper_arm_joint"/>
+        <joint name="right_lower_arm_joint"/>
     </group>
     <group name="k1_left_arm">
-        <joint name="left_shoulder"/>
-        <joint name="left_arm_upper"/>
-        <joint name="left_arm_lower"/>
-        <chain base_link="base_link" tip_link="left_hand_link"/>
+        <joint name="left_shoulder_joint"/>
+        <joint name="left_upper_arm_joint"/>
+        <joint name="left_lower_arm_joint"/>
     </group>
     <group name="k1_robot">
         <group name="k1_right_leg"/>
@@ -45,78 +41,61 @@
     </group>
     <group name="k1_head">
         <link name="head_link"/>
-        <joint name="head"/>
+        <joint name="head_joint"/>
     </group>
     <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
     <group_state name="standing" group="k1_robot">
-        <joint name="left_ankle" value="0"/>
-        <joint name="left_arm_lower" value="0"/>
-        <joint name="left_arm_upper" value="0"/>
-        <joint name="left_calf" value="0"/>
-        <joint name="left_hip" value="0"/>
-        <joint name="left_knee" value="0"/>
-        <joint name="left_shoulder" value="0"/>
-        <joint name="left_thigh" value="0"/>
-        <joint name="right_ankle" value="0"/>
-        <joint name="right_arm_lower" value="0"/>
-        <joint name="right_calf" value="0"/>
-        <joint name="right_hip" value="0"/>
-        <joint name="right_knee" value="0"/>
-        <joint name="right_shoulder" value="0"/>
-        <joint name="right_thigh" value="0"/>
-        <joint name="right_upper" value="0"/>
+        <joint name="left_ankle_joint" value="0"/>
+        <joint name="left_calf_joint" value="0"/>
+        <joint name="left_hip_joint" value="0"/>
+        <joint name="left_knee_joint" value="0"/>
+        <joint name="left_lower_arm_joint" value="0"/>
+        <joint name="left_shoulder_joint" value="0"/>
+        <joint name="left_thigh_joint" value="0"/>
+        <joint name="left_upper_arm_joint" value="0"/>
+        <joint name="right_ankle_joint" value="0"/>
+        <joint name="right_calf_joint" value="0"/>
+        <joint name="right_hip_joint" value="0"/>
+        <joint name="right_knee_joint" value="0"/>
+        <joint name="right_lower_arm_joint" value="0"/>
+        <joint name="right_shoulder_joint" value="0"/>
+        <joint name="right_thigh_joint" value="0"/>
+        <joint name="right_upper_arm_joint" value="0"/>
     </group_state>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
     <end_effector name="right_foot" parent_link="right_hip_link" group="k1_right_leg" parent_group="k1_robot"/>
     <end_effector name="left_foot" parent_link="left_hip_link" group="k1_left_leg" parent_group="k1_robot"/>
-    <end_effector name="left_hand" parent_link="left_hand_link" group="k1_left_arm" parent_group="k1_robot"/>
-    <end_effector name="right_hand" parent_link="right_hand_link" group="k1_right_arm" parent_group="k1_robot"/>
     <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
     <virtual_joint name="virtual_base" type="fixed" parent_frame="world" child_link="base_link"/>
-    <virtual_joint name="r_hand" type="floating" parent_frame="world" child_link="right_hand_link"/>
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
-    <disable_collisions link1="base_link" link2="face_link" reason="Never"/>
     <disable_collisions link1="base_link" link2="head_link" reason="Adjacent"/>
-    <disable_collisions link1="base_link" link2="left_arm_link" reason="Adjacent"/>
     <disable_collisions link1="base_link" link2="left_hip_link" reason="Adjacent"/>
-    <disable_collisions link1="base_link" link2="right_arm_link" reason="Adjacent"/>
+    <disable_collisions link1="base_link" link2="left_shoulder_link" reason="Adjacent"/>
     <disable_collisions link1="base_link" link2="right_hip_link" reason="Adjacent"/>
-    <disable_collisions link1="face_link" link2="head_link" reason="Adjacent"/>
-    <disable_collisions link1="face_link" link2="left_arm_link" reason="Never"/>
-    <disable_collisions link1="face_link" link2="left_hip_link" reason="Never"/>
-    <disable_collisions link1="face_link" link2="left_thigh_link" reason="Never"/>
-    <disable_collisions link1="face_link" link2="right_arm_link" reason="Never"/>
-    <disable_collisions link1="face_link" link2="right_hip_link" reason="Never"/>
-    <disable_collisions link1="face_link" link2="right_thigh_link" reason="Never"/>
-    <disable_collisions link1="head_link" link2="left_arm_link" reason="Never"/>
+    <disable_collisions link1="base_link" link2="right_shoulder_link" reason="Adjacent"/>
     <disable_collisions link1="head_link" link2="left_hip_link" reason="Never"/>
+    <disable_collisions link1="head_link" link2="left_shoulder_link" reason="Never"/>
     <disable_collisions link1="head_link" link2="left_thigh_link" reason="Never"/>
-    <disable_collisions link1="head_link" link2="right_arm_link" reason="Never"/>
     <disable_collisions link1="head_link" link2="right_hip_link" reason="Never"/>
+    <disable_collisions link1="head_link" link2="right_shoulder_link" reason="Never"/>
     <disable_collisions link1="head_link" link2="right_thigh_link" reason="Never"/>
     <disable_collisions link1="left_ankle_link" link2="left_calf_link" reason="Adjacent"/>
-    <disable_collisions link1="left_ankle_link" link2="left_foot_link" reason="Adjacent"/>
-    <disable_collisions link1="left_arm_link" link2="left_arm_upper_link" reason="Adjacent"/>
-    <disable_collisions link1="left_arm_link" link2="left_hip_link" reason="Never"/>
-    <disable_collisions link1="left_arm_link" link2="right_arm_link" reason="Never"/>
-    <disable_collisions link1="left_arm_link" link2="right_arm_upper_link" reason="Never"/>
-    <disable_collisions link1="left_arm_link" link2="right_hip_link" reason="Never"/>
-    <disable_collisions link1="left_arm_lower_link" link2="left_arm_upper_link" reason="Adjacent"/>
-    <disable_collisions link1="left_arm_lower_link" link2="left_hand_link" reason="Adjacent"/>
-    <disable_collisions link1="left_arm_upper_link" link2="right_arm_link" reason="Never"/>
-    <disable_collisions link1="left_calf_link" link2="left_foot_link" reason="Default"/>
     <disable_collisions link1="left_calf_link" link2="left_knee_link" reason="Adjacent"/>
+    <disable_collisions link1="left_hip_link" link2="left_shoulder_link" reason="Never"/>
     <disable_collisions link1="left_hip_link" link2="left_thigh_link" reason="Adjacent"/>
-    <disable_collisions link1="left_hip_link" link2="right_arm_link" reason="Never"/>
+    <disable_collisions link1="left_hip_link" link2="right_shoulder_link" reason="Never"/>
     <disable_collisions link1="left_knee_link" link2="left_thigh_link" reason="Adjacent"/>
+    <disable_collisions link1="left_lower_arm_link" link2="left_upper_arm_link" reason="Adjacent"/>
+    <disable_collisions link1="left_shoulder_link" link2="left_upper_arm_link" reason="Adjacent"/>
+    <disable_collisions link1="left_shoulder_link" link2="right_hip_link" reason="Never"/>
+    <disable_collisions link1="left_shoulder_link" link2="right_shoulder_link" reason="Never"/>
+    <disable_collisions link1="left_shoulder_link" link2="right_upper_arm_link" reason="Never"/>
+    <disable_collisions link1="left_upper_arm_link" link2="right_shoulder_link" reason="Never"/>
     <disable_collisions link1="right_ankle_link" link2="right_calf_link" reason="Adjacent"/>
-    <disable_collisions link1="right_ankle_link" link2="right_foot_link" reason="Adjacent"/>
-    <disable_collisions link1="right_arm_link" link2="right_arm_upper_link" reason="Adjacent"/>
-    <disable_collisions link1="right_arm_link" link2="right_hip_link" reason="Never"/>
-    <disable_collisions link1="right_arm_lower_link" link2="right_arm_upper_link" reason="Adjacent"/>
-    <disable_collisions link1="right_arm_lower_link" link2="right_hand_link" reason="Adjacent"/>
-    <disable_collisions link1="right_calf_link" link2="right_foot_link" reason="Default"/>
     <disable_collisions link1="right_calf_link" link2="right_knee_link" reason="Adjacent"/>
+    <disable_collisions link1="right_hip_link" link2="right_shoulder_link" reason="Never"/>
     <disable_collisions link1="right_hip_link" link2="right_thigh_link" reason="Adjacent"/>
     <disable_collisions link1="right_knee_link" link2="right_thigh_link" reason="Adjacent"/>
+    <disable_collisions link1="right_lower_arm_link" link2="right_upper_arm_link" reason="Adjacent"/>
+    <disable_collisions link1="right_shoulder_link" link2="right_upper_arm_link" reason="Adjacent"/>
 </robot>
