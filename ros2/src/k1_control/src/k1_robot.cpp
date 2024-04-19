@@ -38,22 +38,22 @@ Robot::Robot(const std::string& device) :
 {
 
   float default_conversion = COUNTS_PER_REV / (2 * M_PI);
-  conversion[0] = default_conversion;
-  conversion[1] = default_conversion;
-  conversion[2] = default_conversion;
-  conversion[3] = default_conversion;
-  conversion[4] = default_conversion;
-  conversion[5] = default_conversion;
-  conversion[6] = default_conversion;
-  conversion[7] = default_conversion; // r shoulder
-  conversion[8] = default_conversion;
-  conversion[9] = default_conversion;
-  conversion[10] = default_conversion;
-  conversion[11] = default_conversion;
-  conversion[12] = default_conversion;
-  conversion[13] = default_conversion; // left lower
-  conversion[14] = default_conversion;
-  conversion[15] = default_conversion;
+  conversion[0] = -default_conversion; // l thigh
+  conversion[1] = default_conversion;  // l knee
+  conversion[2] = default_conversion;  // l calf
+  conversion[3] = default_conversion;  // r thigh
+  conversion[4] = -default_conversion;  // r knee
+  conversion[5] = -default_conversion;  // r calf
+  conversion[6] = default_conversion;  // l shoulder
+  conversion[7] = -default_conversion; // r shoulder
+  conversion[8] = default_conversion;  // l hip
+  conversion[9] = -default_conversion;  // l foot
+  conversion[10] = -default_conversion;  // r hip
+  conversion[11] = default_conversion;  // r foot
+  conversion[12] = default_conversion;  // r ankle
+  conversion[13] = -default_conversion; // left lower
+  conversion[14] = -default_conversion;  // r arm
+  conversion[15] = default_conversion;  // r hand
   conversion[16] = default_conversion;
   RCLCPP_INFO_STREAM(logger_, "Opening: " << device_name_);
   serial_device_ = open(device_name_.c_str(), O_RDWR | O_NOCTTY | O_NONBLOCK);
