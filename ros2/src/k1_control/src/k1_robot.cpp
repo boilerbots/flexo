@@ -37,7 +37,24 @@ Robot::Robot(const std::string& device) :
   receive_message_count(0)
 {
 
-  conversion = COUNTS_PER_REV / (2 * M_PI);
+  float default_conversion = COUNTS_PER_REV / (2 * M_PI);
+  conversion[0] = default_conversion;
+  conversion[1] = default_conversion;
+  conversion[2] = default_conversion;
+  conversion[3] = default_conversion;
+  conversion[4] = default_conversion;
+  conversion[5] = default_conversion;
+  conversion[6] = default_conversion;
+  conversion[7] = default_conversion; // r shoulder
+  conversion[8] = default_conversion;
+  conversion[9] = default_conversion;
+  conversion[10] = default_conversion;
+  conversion[11] = default_conversion;
+  conversion[12] = default_conversion;
+  conversion[13] = default_conversion; // left lower
+  conversion[14] = default_conversion;
+  conversion[15] = default_conversion;
+  conversion[16] = default_conversion;
   RCLCPP_INFO_STREAM(logger_, "Opening: " << device_name_);
   serial_device_ = open(device_name_.c_str(), O_RDWR | O_NOCTTY | O_NONBLOCK);
   if (serial_device_ < 0) {
@@ -262,7 +279,7 @@ void Robot::writeJointPositions(const std::vector<double>& position) {
       RCLCPP_WARN(logger_, "ch=%d  pos=%lf", xx, position[xx]);
     }
 #endif
-    current_position[xx] = home_position[xx] - (position[xx] * conversion);
+    current_position[xx] = home_position[xx] - (position[xx] * conversion[xx]);
   }
   hw_lock.unlock();
   compute_hwval();
@@ -276,7 +293,7 @@ void Robot::readJointPositions(std::vector<double>& position) {
   hw_lock.lock();
   for (int xx = 0; xx < REAL_CHANNELS; ++xx) {
     //current_position[xx] = home_position[xx] - (position[xx] * conversion);
-    position[xx] = (home_position[xx] - current_position[xx]) / conversion;
+    position[xx] = (home_position[xx] - current_position[xx]) / conversion[xx];
   }
   hw_lock.unlock();
 }
