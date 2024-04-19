@@ -91,6 +91,6 @@ class Robot {
   std::array<uint16_t, MAX_CHANNELS> current_position = {0};
   std::array<uint8_t, MAX_CHANNELS * 2> hw_val = {0};
   int receive_message_count;
-  float conversion;
+  float conversion[REAL_CHANNELS];
 };
 }
