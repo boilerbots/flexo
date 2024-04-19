@@ -9,7 +9,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/base_link.STL" />
+        <mesh filename="package://robot/meshes/visual/base_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
@@ -18,7 +18,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/base_link.STL" />
+        <mesh filename="package://robot/meshes/collision/base_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -31,7 +31,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/right_hip_link.STL" />
+        <mesh filename="package://robot/meshes/visual/right_hip_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.250980392156863 0.250980392156863 0.250980392156863 1" />
@@ -40,7 +40,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/right_hip_link.STL" />
+        <mesh filename="package://robot/meshes/collision/right_hip_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -59,7 +59,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/right_thigh_link.STL" />
+        <mesh filename="package://robot/meshes/visual/right_thigh_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.250980392156863 0.250980392156863 0.250980392156863 1" />
@@ -68,7 +68,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/right_thigh_link.STL" />
+        <mesh filename="package://robot/meshes/collision/right_thigh_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -87,7 +87,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/right_knee_link.STL" />
+        <mesh filename="package://robot/meshes/visual/right_knee_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.752941176470588 1 1 1" />
@@ -96,7 +96,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/right_knee_link.STL" />
+        <mesh filename="package://robot/meshes/collision/right_knee_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -115,7 +115,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/right_calf_link.STL" />
+        <mesh filename="package://robot/meshes/visual/right_calf_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.752941176470588 1 1 1" />
@@ -124,7 +124,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/right_calf_link.STL" />
+        <mesh filename="package://robot/meshes/collision/right_calf_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -143,7 +143,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/right_ankle_link.STL" />
+        <mesh filename="package://robot/meshes/visual/right_ankle_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.752941176470588 1 1 1" />
@@ -152,7 +152,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/right_ankle_link.STL" />
+        <mesh filename="package://robot/meshes/collision/right_ankle_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -171,7 +171,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/left_hip_link.STL" />
+        <mesh filename="package://robot/meshes/visual/left_hip_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.250980392156863 0.250980392156863 0.250980392156863 1" />
@@ -180,7 +180,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/left_hip_link.STL" />
+        <mesh filename="package://robot/meshes/collision/left_hip_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -199,7 +199,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/left_thigh_link.STL" />
+        <mesh filename="package://robot/meshes/visual/left_thigh_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.250980392156863 0.250980392156863 0.250980392156863 1" />
@@ -208,7 +208,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/left_thigh_link.STL" />
+        <mesh filename="package://robot/meshes/collision/left_thigh_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -227,7 +227,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/left_knee_link.STL" />
+        <mesh filename="package://robot/meshes/visual/left_knee_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.752941176470588 1 1 1" />
@@ -236,7 +236,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/left_knee_link.STL" />
+        <mesh filename="package://robot/meshes/collision/left_knee_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -255,7 +255,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/left_calf_link.STL" />
+        <mesh filename="package://robot/meshes/visual/left_calf_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.752941176470588 1 1 1" />
@@ -264,7 +264,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/left_calf_link.STL" />
+        <mesh filename="package://robot/meshes/collision/left_calf_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -283,7 +283,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/left_ankle_link.STL" />
+        <mesh filename="package://robot/meshes/visual/left_ankle_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.752941176470588 1 1 1" />
@@ -292,7 +292,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/left_ankle_link.STL" />
+        <mesh filename="package://robot/meshes/collision/left_ankle_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -311,7 +311,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/right_shoulder_link.STL" />
+        <mesh filename="package://robot/meshes/visual/right_shoulder_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.752941176470588 1 1 1" />
@@ -320,7 +320,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/right_shoulder_link.STL" />
+        <mesh filename="package://robot/meshes/collision/right_shoulder_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -339,7 +339,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/right_upper_arm_link.STL" />
+        <mesh filename="package://robot/meshes/visual/right_upper_arm_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.250980392156863 0.250980392156863 0.250980392156863 1" />
@@ -348,7 +348,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/right_upper_arm_link.STL" />
+        <mesh filename="package://robot/meshes/collision/right_upper_arm_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -367,7 +367,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/right_lower_arm_link.STL" />
+        <mesh filename="package://robot/meshes/visual/right_lower_arm_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.250980392156863 0.250980392156863 0.250980392156863 1" />
@@ -376,7 +376,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/right_lower_arm_link.STL" />
+        <mesh filename="package://robot/meshes/collision/right_lower_arm_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -395,7 +395,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/left_shoulder_link.STL" />
+        <mesh filename="package://robot/meshes/visual/left_shoulder_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.752941176470588 1 1 1" />
@@ -404,7 +404,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/left_shoulder_link.STL" />
+        <mesh filename="package://robot/meshes/collision/left_shoulder_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -423,7 +423,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/left_upper_arm_link.STL" />
+        <mesh filename="package://robot/meshes/visual/left_upper_arm_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.250980392156863 0.250980392156863 0.250980392156863 1" />
@@ -432,7 +432,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/left_upper_arm_link.STL" />
+        <mesh filename="package://robot/meshes/collision/left_upper_arm_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -451,7 +451,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/left_lower_arm_link.STL" />
+        <mesh filename="package://robot/meshes/visual/left_lower_arm_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.250980392156863 0.250980392156863 0.250980392156863 1" />
@@ -460,7 +460,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/left_lower_arm_link.STL" />
+        <mesh filename="package://robot/meshes/collision/left_lower_arm_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -479,7 +479,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/head_link.STL" />
+        <mesh filename="package://robot/meshes/visual/head_link.STL" />
       </geometry>
       <material name="">
         <color rgba="1 0.501960784313725 1 1" />
@@ -488,7 +488,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://robot/meshes/head_link.STL" />
+        <mesh filename="package://robot/meshes/collision/head_link.STL" />
       </geometry>
     </collision>
   </link>
