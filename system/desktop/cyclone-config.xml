@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CycloneDDS id="any">
+ <Domain>
+     <General>
+        <AllowMulticast>spdp</AllowMulticast>
+         <Interfaces>
+             <!--<NetworkInterface name="eno2"/>-->
+             <NetworkInterface address="127.0.0.1" multicast="true"/> 
+         </Interfaces>
+         <DontRoute>true</DontRoute>
+     </General>
+ </Domain>
+</CycloneDDS>
