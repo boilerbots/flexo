@@ -262,12 +262,12 @@ void Robot::startRobot() {
   RCLCPP_INFO_STREAM(logger_, "Starting the robot");
   send(std::span<const uint8_t>(initialize));
   usleep(300000);
-  send(std::span<const uint8_t>(enable));
-  usleep(2000);
   for (int xx = 0; xx < 4; ++xx) {
     get_position();
   }
   compute_hwval();
+  send(std::span<const uint8_t>(enable));
+  usleep(2000);
 }
 
 void Robot::writeJointPositions(const std::vector<double>& position) {

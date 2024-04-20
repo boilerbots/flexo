@@ -10,7 +10,7 @@
                 <plugin>mock_components/GenericSystem</plugin>
 -->
                 <plugin>k1_control/RobotSystem</plugin>
-                <param name="device">/dev/ttyAMA0</param>
+                <param name="device">/dev/serial0</param>
             </hardware>
             <joint name="left_thigh_joint">
                 <command_interface name="position"/>
